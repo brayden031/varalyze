@@ -1,4 +1,4 @@
-# 🛡️ Varalyze - Threat Intelligence Tool Suite 🛡️
+# 🚨 Varalyze - Threat Intelligence Tool Suite 🚨
 
 ## Overview
 **Varalyze** is a threat intelligence tool suite that combines a diverse range of web-based applications into one seamless platform through the use of APIs and python libraries. This allows for comprehensive security event triaging due to the holistic view of the threat landscape this tool suite can offer. In addition to the fundamental tools the program offers, it also provides a variety of beneficial features to users that can significantly help in aiding defensive teams. 
