@@ -5,11 +5,11 @@
 from shared_imports import *
 
 # page imports
-from tool_options import IP
-from tool_options import Domain
-from tool_options import File
-from tool_options import MAC
-from features import history_cli_tool
+from tool_options import ip
+from tool_options import domain
+#from tool_options import file
+#from tool_options import MAC
+#from features import history_cli_tool
 
 # function used anytime user wishes to exit the program
 def exit_program():
@@ -50,23 +50,23 @@ Varalyze is a threat intelligence tool suite that combines a diverse range of we
                 user_tool = input("Enter the number you wish to select: ")
                 if user_tool == '1':
                     os.system('cls')
-                    IP.IP_tools()
+                    ip.ip_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '2':
                     os.system('cls')
-                    Domain.Domain_tools()
+                    domain.domain_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '3':
                     os.system('cls')
-                    File.File_tools()
+                    #file.file_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '4':
                     os.system('cls')
-                    MAC.MAC_tools()
+                    #MAC.MAC_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '5':
                     os.system('cls')
-                    history_cli_tool.main()
+                    #history_cli_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '6':
                     exit_program()

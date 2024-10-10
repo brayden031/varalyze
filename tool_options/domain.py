@@ -1,0 +1,34 @@
+# imports
+import varalyze_cli
+from shared_imports import *
+#from Scripts import urlscan_cli_tool
+#from Scripts import virustotal_cli_tool
+#from Scripts import whois_domain_cli_tool
+
+# function to decide which tool the user wishes to use
+def domain_tools():
+    print("\n►►► You have selected Domain & URL tools ◄◄◄")
+    print("Welcome to the Domain & URL tools. These tools will retrieve useful details associated with an Domain/URL...")
+    awaiting_valid_tool_choice = True
+    while awaiting_valid_tool_choice:
+            user_option = input("""\nChoose a tool from the categories below: \n\n 1. URL Scan \n 2. VirusTotal \n 3. WhoIS \n\n 4. Return to home page \n 5. Exit \n\nEnter the number of the tool you wish to select: """) 
+            if user_option == '1':
+                os.system('cls')
+                #urlscan_cli_tool.main()
+                awaiting_valid_tool_choice = False
+            elif user_option == '2':
+                os.system('cls')
+                #virustotal_cli_tool.main()
+                awaiting_valid_tool_choice = False
+            elif user_option == '3':
+                os.system('cls')
+                #whois_domain_cli_tool.main()
+                awaiting_valid_tool_choice = False
+            elif user_option == '4':
+                os.system('cls')
+                varalyze_cli.main()
+                break
+            elif user_option == '5':
+                varalyze_cli.exit_program()
+            else:
+                print("\nError: Invalid choice. Please select from 1-5...\n")
