@@ -7,8 +7,8 @@ from shared_imports import *
 # page imports
 from tool_options import ip
 from tool_options import domain
-#from tool_options import file
-#from tool_options import MAC
+from tool_options import file
+from tool_options import MAC
 #from features import history_cli_tool
 
 # function used anytime user wishes to exit the program
@@ -58,11 +58,11 @@ Varalyze is a threat intelligence tool suite that combines a diverse range of we
                     awaiting_valid_choice = False
                 elif user_tool == '3':
                     os.system('cls')
-                    #file.file_tools()
+                    file.file_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '4':
                     os.system('cls')
-                    #MAC.MAC_tools()
+                    MAC.MAC_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '5':
                     os.system('cls')
