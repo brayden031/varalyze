@@ -4,7 +4,7 @@ from shared_imports import *
 #from Scripts import macvendors_cli_tool
 
 # function to decide which tool the user wishes to use
-def MAC_tools():
+def mac_tools():
         print("\n►►► You have selected the MAC address tool ◄◄◄")
         print("Welcome to the MAC address tool. This tool will retrieve a vendor for an associated MAC address...")
         awaiting_valid_tool_choice = True
