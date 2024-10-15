@@ -41,7 +41,7 @@ def main():
 ║         a diverse range of web-based applications into one seamless        ║
 ║         platform through the use of APIs and Python libraries. This        ║
 ║         allows for comprehensive security event triaging due to the        ║
-║         holistic view of the threat landscape this tool suite can offer.   ║
+║       holistic view of the threat landscape this tool suite can offer.     ║
 ║                                                                            ║
 ╠════════════════════════════════════════════════════════════════════════════╣
 ║                                                                            ║                                

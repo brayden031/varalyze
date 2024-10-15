@@ -24,8 +24,8 @@ def ip_tools():
 ║                                                                            ║
 ║            TOOLS                                            OTHER          ║
 ║                                                                            ║
-║            1. AbuseIPDB (IP reputation, reports, details)   5. Exit        ║
-║            2. Whois (Registrant info, ownership details)                   ║ 
+║            1. AbuseIPDB (IP reputation, reports, details)   5. Home page   ║
+║            2. Whois (Registrant info, ownership details)    6. Exit        ║ 
 ║            3. IPLocation (Geographic location, ISP data)                   ║
 ║            4. IPQuality (IP risk score, fraud detection)                   ║
 ║                                                                            ║
@@ -56,6 +56,4 @@ def ip_tools():
             elif user_option == '6':
                 varalyze_cli.exit_program()
             else:
-                os.system('cls')
-                print("\nError: Invalid choice. Please select from 1-5...\n")
-    awaiting_valid_tool_choice = True
+                print("\nError: Invalid choice. Please select from 1-6...\n")
