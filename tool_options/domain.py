@@ -7,11 +7,31 @@ from shared_imports import *
 
 # function to decide which tool the user wishes to use
 def domain_tools():
-    print("\n►►► You have selected Domain & URL tools ◄◄◄")
-    print("Welcome to the Domain & URL tools. These tools will retrieve useful details associated with an Domain/URL...")
+    print("""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                             Domain / URL tools                             ║
+║                                                                            ║ 
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║          Welcome to the Domain & URL tools. These tools will retrieve      ║
+║                useful details associated with an Domain/URL..              ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║               ▼ Choose a tool from the list below to begin ▼               ║
+║                                                                            ║
+║        TOOLS                                                  OTHER        ║
+║                                                                            ║
+║        1. URLScan (Site behaviour, security insights)         4. Home page ║
+║        2. VirusTotal (Malware detection, reputation analysis) 5. Exit      ║ 
+║        3. WhoIS (Domain ownership, registration details)                   ║                  
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+""")
     awaiting_valid_tool_choice = True
     while awaiting_valid_tool_choice:
-            user_option = input("""\nChoose a tool from the categories below: \n\n 1. URL Scan \n 2. VirusTotal \n 3. WhoIS \n\n 4. Return to home page \n 5. Exit \n\nEnter the number of the tool you wish to select: """) 
+            user_option = input("Enter the number of the tool you wish to select: ") 
             if user_option == '1':
                 os.system('cls')
                 #urlscan_cli_tool.main()

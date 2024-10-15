@@ -57,5 +57,5 @@ def ip_tools():
                 varalyze_cli.exit_program()
             else:
                 os.system('cls')
-                print("\nError: Invalid choice. Please select from 1-6...\n")
+                print("\nError: Invalid choice. Please select from 1-5...\n")
     awaiting_valid_tool_choice = True
