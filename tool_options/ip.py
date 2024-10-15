@@ -8,11 +8,32 @@ from shared_imports import *
 
 # function to decide which tool the user wishes to use
 def ip_tools():
-    print("\n►►► You have selected IP address tools ◄◄◄")
-    print("Welcome to the ip address tools. These tools will retrieve a vast amount of useful details associated with an ip...")
+    print("""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                              IP address tools                              ║
+║                                                                            ║ 
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║           Welcome to the ip address tools. These tools will retrieve       ║
+║            a vast amount of useful details associated with an ip...        ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║               ▼ Choose a tool from the list below to begin ▼               ║
+║                                                                            ║
+║            TOOLS                                            OTHER          ║
+║                                                                            ║
+║            1. AbuseIPDB (IP reputation, reports, details)   5. Exit        ║
+║            2. Whois (Registrant info, ownership details)                   ║ 
+║            3. IPLocation (Geographic location, ISP data)                   ║
+║            4. IPQuality (IP risk score, fraud detection)                   ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+""")
     awaiting_valid_tool_choice = True
     while awaiting_valid_tool_choice:
-            user_option = input("""\nChoose a tool from the options below: \n\n 1. AbuseIPDB \n 2. Whois \n 3. iplocation \n 4. ipquality \n\n 5. Return to home page \n 6. Exit program \n\nEnter the number of the tool you wish to select: """) 
+            user_option = input("Enter the number of the tool you wish to select: ") 
             if user_option == '1':
                 os.system('cls')
                 #abuseIPDB_cli_tool.main()

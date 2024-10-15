@@ -4,7 +4,7 @@ from shared_imports import *
 #from Scripts import virustotal_file_cli_tool
 
 # function to decide which tool the user wishes to use
-def File_tools():
+def file_tools():
         print("\n►►► You have selected File/Hash tools ◄◄◄")
         print("Welcome to the file & hash tools. This tools can analyse files to help determine whether they are safe or malware...")
         awaiting_valid_tool_choice = True

@@ -22,28 +22,39 @@ def main():
     while home_page:
             os.system('cls')
             print("""
-██╗   ██╗ █████╗ ██████╗  █████╗ ██╗  ██╗   ██╗███████╗███████╗
-██║   ██║██╔══██╗██╔══██╗██╔══██╗██║  ╚██╗ ██╔╝╚══███╔╝██╔════╝
-██║   ██║███████║██████╔╝███████║██║   ╚████╔╝   ███╔╝ █████╗  
-╚██╗ ██╔╝██╔══██║██╔══██╗██╔══██║██║    ╚██╔╝   ███╔╝  ██╔══╝  
- ╚████╔╝ ██║  ██║██║  ██║██║  ██║███████╗██║   ███████╗███████╗
-  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝   ╚══════╝╚══════╝
-                                                               
-Welcome to the homepage of the Varalyze tool suite...
-                  
-ⓘ What is this program? ⓘ
-                  
-Varalyze is a threat intelligence tool suite that combines a diverse range of web based applications into one seamless\nplatform through the use of APIs and python libraries. This allows for comprehensive security event triaging due to the holistic view of the threat landscape this tool suite can offer.
-                                        
-▼ Choose a category from the list below to begin your investigations ▼
-
-1. IP Address
-2. Domain & URL
-3. File & Hash
-4. MAC address
-
-5. History
-6. Exit
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                                                                            ║
+║       ██╗   ██╗ █████╗ ██████╗  █████╗ ██╗  ██╗   ██╗███████╗███████╗      ║
+║       ██║   ██║██╔══██╗██╔══██╗██╔══██╗██║  ╚██╗ ██╔╝╚══███╔╝██╔════╝      ║
+║       ██║   ██║███████║██████╔╝███████║██║   ╚████╔╝   ███╔╝ █████╗        ║
+║       ╚██╗ ██╔╝██╔══██║██╔══██╗██╔══██║██║    ╚██╔╝   ███╔╝  ██╔══╝        ║
+║        ╚████╔╝ ██║  ██║██║  ██║██║  ██║███████╗██║   ███████╗███████╗      ║
+║         ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝   ╚══════╝╚══════╝      ║
+║                                                                            ║
+║                   Vᴇʀsɪᴏɴ: 1.0            Aᴜᴛʜᴏʀ: ʙʀᴀʏᴅᴇɴ031               ║  
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║           Welcome to the homepage of the Varalyze tool suite...            ║
+║                                                                            ║
+║         Varalyze is a threat intelligence tool suite that combines         ║
+║         a diverse range of web-based applications into one seamless        ║
+║         platform through the use of APIs and Python libraries. This        ║
+║         allows for comprehensive security event triaging due to the        ║
+║         holistic view of the threat landscape this tool suite can offer.   ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║           ▼ Choose a category from the list below to begin ▼               ║
+║                                                                            ║
+║        TOOL PAGES              FEATURES               OTHER                ║
+║                                                                            ║
+║        1. IP Address           5. History             8. API Key Check     ║
+║        2. Domain & URL         6. Multi-use           9. API Key Config    ║
+║        3. File & Hash          7. Generate Report     10. Exit             ║
+║        4. MAC Address                                                      ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
 """)
             awaiting_valid_choice = True
             while awaiting_valid_choice:
@@ -68,7 +79,7 @@ Varalyze is a threat intelligence tool suite that combines a diverse range of we
                     os.system('cls')
                     #history_cli_tool.main()
                     awaiting_valid_choice = False
-                elif user_tool == '6':
+                elif user_tool == '10':
                     exit_program()
                 else:
                     print("\nError: Invalid choice. Please select from 1-5...\n")               
