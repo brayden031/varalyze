@@ -5,10 +5,10 @@
 from shared_imports import *
 
 # page imports
-from tool_options import ip
-from tool_options import domain
-from tool_options import file
-from tool_options import mac
+from tool_options import ip_tool
+from tool_options import domain_tool
+from tool_options import file_tool
+from tool_options import mac_tool
 #from features import history_cli_tool
 
 # function used anytime user wishes to exit the program
@@ -61,19 +61,19 @@ def main():
                 user_tool = input("Enter the number you wish to select: ")
                 if user_tool == '1':
                     os.system('cls')
-                    ip.ip_tools()
+                    ip_tool.ip_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '2':
                     os.system('cls')
-                    domain.domain_tools()
+                    domain_tool.domain_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '3':
                     os.system('cls')
-                    file.file_tools()
+                    file_tool.file_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '4':
                     os.system('cls')
-                    mac.mac_tools()
+                    mac_tool.mac_tools()
                     awaiting_valid_choice = False
                 elif user_tool == '5':
                     os.system('cls')

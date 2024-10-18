@@ -1,7 +1,7 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-#from Scripts import abuseIPDB_cli_tool
+from Scripts import abuseIPDB_cli_tool
 #from Scripts import whois_cli_tool
 #from Scripts import ipquality_cli_tool
 #from Scripts import iplocation_cli_tool
@@ -36,7 +36,7 @@ def ip_tools():
             user_option = input("Enter the number of the tool you wish to select: ") 
             if user_option == '1':
                 os.system('cls')
-                #abuseIPDB_cli_tool.main()
+                abuseIPDB_cli_tool.main()
                 awaiting_valid_tool_choice = False
             elif user_option == '2':
                 os.system('cls')
