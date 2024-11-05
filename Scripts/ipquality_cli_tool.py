@@ -3,8 +3,8 @@ from shared_imports import *
 from tool_options import ip_tool
 import varalyze_cli
 
-# ipquality API connection
-def ipquality_connection(ip_address):
+# iplocation API connection
+def iplocation_connection(ip_address):
     url = f'https://api.iplocation.net/?ip={ip_address}'
     try:
         # Connection produces 200 even on invalid entries but this still determines that overall site is available for requests
@@ -41,7 +41,7 @@ def main():
     running_tool = True
     while running_tool:
         ip_address = input("Enter an IP address to check: ")
-        ip_data = ipquality_connection(ip_address)
+        ip_data = iplocation_connection(ip_address)
         ip_results(ip_data, ip_address)
         
         # First loop for determining if the user would like to check another
