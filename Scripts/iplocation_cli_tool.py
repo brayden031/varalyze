@@ -3,10 +3,11 @@ from shared_imports import *
 from tool_options import ip_tool
 import varalyze_cli
 
-# ipquality API connection
-def ipquality_connection(ip_address, IPQUALITY_API_KEY):
-    url = f'https://www.ipqualityscore.com/api/json/ip/{IPQUALITY_API_KEY}/{ip_address}'
+# iplocation API connection
+def iplocation_connection(ip_address):
+    url = f'https://api.iplocation.net/?ip={ip_address}'
     try:
+        # Connection produces 200 even on invalid entries but this still determines that overall site is available for requests
         response = requests.get(url)
         if response.status_code == 200:
             return response.json()
@@ -21,33 +22,26 @@ def ip_results(ip_data, ip_address):
     if ip_data is None:
         print("No data found for this IP address you provided.")
     else:
-        print("\n▼ IP Quality results ▼\n")
+        print("\n▼ IP Location results ▼\n")
         table.field_names = ["Field", "Result"]
-        table.add_row(["IP Quality score", Fore.GREEN + str(ip_data.get('fraud_score', 'Unknown')) + Style.RESET_ALL])
-        table.add_row(["ISP", Fore.GREEN + ip_data.get('ISP', 'Unknown') + Style.RESET_ALL])
-        table.add_row(["VPN Connection", Fore.GREEN + str(ip_data.get('vpn', 'Unknown')) + Style.RESET_ALL])
-        table.add_row(["Active VPN connection", Fore.GREEN + str(ip_data.get('active_vpn', 'Unknown')) + Style.RESET_ALL])
-        table.add_row(["Tor Connection", Fore.GREEN + str(ip_data.get('tor', 'Unknown')) + Style.RESET_ALL])
-        table.add_row(["Proxy", Fore.GREEN + str(ip_data.get('proxy', 'Unknown')) + Style.RESET_ALL])
-        table.max_width["Result"] = 80
+        table.add_row(["ISP", Fore.GREEN + ip_data.get('isp', 'Unknown') + Style.RESET_ALL])
+        table.add_row(["Country", Fore.GREEN + ip_data.get('country_name', 'Unknown') + Style.RESET_ALL])
+        table.add_row(["Country code", Fore.GREEN + str(ip_data.get('country_code2', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["IP version", Fore.GREEN + str(ip_data.get('ip_version', 'Unknown')) + Style.RESET_ALL])
+        # Site will produce 200 status even on invalid entries so getting the response parameter shows if it was an actual valid query
+        table.add_row(["Responde code", Fore.GREEN + str(ip_data.get('response_code', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Response message", Fore.GREEN + str(ip_data.get('response_message', 'Unknown')) + Style.RESET_ALL])
+        table.max_width["Result"] = 80 
         print(table)
         table.clear_rows()
-
+        
 def main():
-    print("\033[1m" + "\n►►► Welcome to the ipquality CLI tool ◄◄◄\n" + "\033[0m")
+    print("\033[1m" + "\n►►► Welcome to the iplocation CLI tool ◄◄◄\n" + "\033[0m")
     # Overall while loop for tool being run
     running_tool = True
     while running_tool:
-        # Try to fetch API key environment variable, if fails displays error message but doesn't prevent program running
-        try:
-            IPQUALITY_API_KEY = os.environ["IPQUALITY_API_KEY"]
-        except KeyError:
-            os.system('cls')
-            print("Error: IPQUALITY_API_KEY environment variable is not set.")
-            print("Returning back to the tool page...")
-            ip_tool.ip_tools()
         ip_address = input("Enter an IP address to check: ")
-        ip_data = ipquality_connection(ip_address, IPQUALITY_API_KEY)
+        ip_data = iplocation_connection(ip_address)
         ip_results(ip_data, ip_address)
         
         # First loop for determining if the user would like to check another
@@ -57,7 +51,7 @@ def main():
             if re_run_tool == 'yes':
                 running_tool = True
                 invalid_re_run = False
-                
+            
             # Exit loop to determine correct input and next user navigation
             elif re_run_tool == 'no':
                 running_tool = False
@@ -74,7 +68,7 @@ def main():
                         invalid_exit = False
                         running_tool = False
                         os.system('cls')
-                        ip_tool.ip_tools()
+                        varalyze_cli.main()
                     elif exit_tool == "exit":
                         invalid_exit = False
                         running_tool = False
@@ -91,5 +85,6 @@ def main():
                 os.system('cls')
                 print("Invalid option, please try again")
 
+    
 if __name__ == "__main__":
     main()
