@@ -2,9 +2,9 @@
 import varalyze_cli
 from shared_imports import *
 from Scripts import abuseIPDB_cli_tool
-#from Scripts import whois_cli_tool
+from Scripts import whois_cli_tool
 from Scripts import ipquality_cli_tool
-#from Scripts import iplocation_cli_tool
+from Scripts import iplocation_cli_tool
 
 # function to decide which tool the user wishes to use
 def ip_tools():
@@ -40,11 +40,11 @@ def ip_tools():
                 awaiting_valid_tool_choice = False
             elif user_option == '2':
                 os.system('cls')
-                #whois_cli_tool.main()
+                whois_cli_tool.main()
                 awaiting_valid_tool_choice = False
             elif user_option == '3':
                 os.system('cls')
-                #iplocation_cli_tool.main()
+                iplocation_cli_tool.main()
                 awaiting_valid_tool_choice = False
             elif user_option == '4':
                 os.system('cls')

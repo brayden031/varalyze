@@ -74,7 +74,7 @@ def main():
                         invalid_exit = False
                         running_tool = False
                         os.system('cls')
-                        ip_tool.ip_tools()
+                        varalyze_cli.main()
                     elif exit_tool == "exit":
                         invalid_exit = False
                         running_tool = False
