@@ -3,7 +3,7 @@ from shared_imports import *
 from tool_options import ip_tool
 import varalyze_cli
 
-#AbuseIPDB API connection
+# AbuseIPDB API connection
 def abuse_IPDB(ip_address, ABUSEIPDB_API_KEY):
     url= f"https://api.abuseipdb.com/api/v2/check?ipAddress={ip_address}"
     headers = {

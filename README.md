@@ -6,7 +6,7 @@
 ### Key Features
 - **Threat Analysis**: Ingest data from a wide range of popular threat intelligence sources such as AbuseIPDB, VirusTotal, URLScan + more!
 - **Streamline & Automation**: Streamline & Automate intelligence gathering, correlation, and reporting.
-- **Comprehensive Reports**: Combine various threat intel tools to generate reports tO aid security event triaging.
+- **Comprehensive Reports**: Combine various threat intel tools to generate reports to aid security event triaging.
 
 ---
 
