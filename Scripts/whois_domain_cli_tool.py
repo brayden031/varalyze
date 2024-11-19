@@ -1,0 +1,83 @@
+#imports
+from shared_imports import *
+from tool_options import domain_tool
+import varalyze_cli
+import whois
+
+# Domain version of WhoIS
+# Whois connection
+def whois_query_results(query):
+    try:
+        query_results = whois.whois(query)
+        print("\n▼ Whois results ▼\n")
+        # Formatting the results retrieved into the command line
+        table.field_names = ["Field", "Result"]
+        table.add_row(["Domain name", Fore.GREEN + str(query_results.get('domain_name', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Registrar", Fore.GREEN + str(query_results.get('registrar', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Creation date", Fore.GREEN + str(query_results.get('creation_date', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Expiration date", Fore.GREEN + str(query_results.get('expiration_date', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Name servers", Fore.GREEN + str(query_results.get('name_servers', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["", ""])
+        table.add_row(["Organisation", Fore.GREEN + str(query_results.get('org', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Address", Fore.GREEN + str(query_results.get('address', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["City", Fore.GREEN + str(query_results.get('city', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["State", Fore.GREEN + str(query_results.get('state', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Country", Fore.GREEN + str(query_results.get('country', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Postal code", Fore.GREEN + str(query_results.get('postal_code', 'Unknown')) + Style.RESET_ALL])
+        table.max_width["Result"] = 80
+        print(table)
+        table.clear_rows()
+    except Exception as e:
+        print("Error encountered", e)
+        
+def main():
+    print("\033[1m" + "\n►►► Welcome to the Whois domain CLI tool ◄◄◄\n" + "\033[0m")
+    # Overall while loop for tool being run
+    running_tool = True
+    while running_tool:
+            query_input = input("Enter a domain name: ")
+            whois_query_results(query_input)
+
+            # First loop for determining if the user would like to check another
+            invalid_re_run = True
+            while invalid_re_run:
+                re_run_tool = input("\nWould you like to check another ?\nEnter 'yes' or 'no'\n\nAnswer: ")
+                if re_run_tool == 'yes':
+                    running_tool = True
+                    invalid_re_run = False
+
+                 # Exit loop to determine correct input and next user navigation
+                elif re_run_tool == 'no':
+                    running_tool = False
+                    invalid_re_run = False
+                    invalid_exit = True
+                    while invalid_exit:
+                        exit_tool = input("\nWould you like to return to the category page, home page or exit the program?\nEnter 'category' or 'home' 'exit'\n\nAnswer: ")
+                        if exit_tool == "category":
+                            invalid_exit = False
+                            running_tool = False
+                            os.system('cls')
+                            domain_tool.domain_tools()
+                        elif exit_tool == "home":
+                            invalid_exit = False
+                            running_tool = False
+                            os.system('cls')
+                            varalyze_cli.main()
+                        elif exit_tool == "exit":
+                            invalid_exit = False
+                            running_tool = False
+                            varalyze_cli.exit_program()
+                        # Error statement for category selection
+                        else:
+                            os.system('cls')
+                            print("Invalid option, please try again")
+                    # Error statement for check again selection
+                    else:
+                        os.system('cls')
+                        print("Invalid option, please try again")
+                else:
+                    os.system('cls')
+                    print("Invalid option, please try again")
+        
+if __name__ == "__main__":
+    main()
