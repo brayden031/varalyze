@@ -1,4 +1,21 @@
-# 🚨 Varalyze - Threat Intelligence Tool Suite 🚨
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/32b3f420-488e-47c7-aeb6-50298192b15e">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/53d6299a-64f7-4f39-a202-cf88f30df686">
+    <img alt="varalyze" title="varalyze" height="300px" />
+  </picture>
+
+  <p align="center">
+  <a href="https://hits.sh/github.com/brayden031/varalyze/">
+  <img src="https://hits.sh/github.com/brayden031/varalyze.svg?style=flat-square&label=Views" alt="Views">
+  </a>
+  <a href="https://github.com/brayden031/varalyze/stargazers">
+    <img src="https://img.shields.io/github/stars/brayden031/varalyze?style=flat-square" alt="Stars">
+  </a>
+  <a href="https://github.com/brayden031/varalyze/commits">
+    <img src="https://img.shields.io/github/last-commit/brayden031/varalyze?style=flat-square" alt="Last Commit">
+  </a>
+</p>
 
 ## Overview
 **Varalyze** is a threat intelligence tool suite that combines a diverse range of web-based applications into one seamless platform through the use of APIs and python libraries. This allows for comprehensive security event triaging due to the holistic view of the threat landscape this tool suite can offer. In addition to the fundamental tools the program offers, it also provides a variety of beneficial features to users that can significantly help in aiding defensive teams. 
