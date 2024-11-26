@@ -1,7 +1,7 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-#from Scripts import urlscan_cli_tool
+from Scripts import urlscan_cli_tool
 #from Scripts import virustotal_cli_tool
 from Scripts import whois_domain_cli_tool
 
@@ -34,7 +34,7 @@ def domain_tools():
             user_option = input("Enter the number of the tool you wish to select: ") 
             if user_option == '1':
                 os.system('cls')
-                #urlscan_cli_tool.main()
+                urlscan_cli_tool.main()
                 awaiting_valid_tool_choice = False
             elif user_option == '2':
                 os.system('cls')
