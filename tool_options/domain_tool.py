@@ -2,7 +2,7 @@
 import varalyze_cli
 from shared_imports import *
 from Scripts import urlscan_cli_tool
-#from Scripts import virustotal_cli_tool
+from Scripts import virustotal_cli_tool
 from Scripts import whois_domain_cli_tool
 
 # function to decide which tool the user wishes to use
@@ -38,7 +38,7 @@ def domain_tools():
                 awaiting_valid_tool_choice = False
             elif user_option == '2':
                 os.system('cls')
-                #virustotal_cli_tool.main()
+                virustotal_cli_tool.main()
                 awaiting_valid_tool_choice = False
             elif user_option == '3':
                 os.system('cls')
