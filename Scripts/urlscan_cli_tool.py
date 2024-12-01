@@ -5,7 +5,6 @@ import varalyze_cli
 
 # URLScan API connection
 def urlscan(url, URLSCAN_API_KEY):
-    submit_url = "https://urlscan.io/api/v1/scan/"
     headers = {
         'API-Key': URLSCAN_API_KEY,
         'Content-Type': 'application/json',
@@ -14,6 +13,8 @@ def urlscan(url, URLSCAN_API_KEY):
         'url': url,
         'visibility': 'public'
     }
+    
+    submit_url = "https://urlscan.io/api/v1/scan/"
     
     # Connection attempt to the URLScan site
     try:
