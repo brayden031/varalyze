@@ -1,7 +1,7 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-#from Scripts import virustotal_file_cli_tool
+from Scripts import virustotal_file_cli_tool
 
 # function to decide which tool the user wishes to use
 def file_tools():
@@ -31,7 +31,7 @@ def file_tools():
         user_option = input("Enter the number you wish to select: ") 
         if user_option == '1':
             os.system('cls')
-            #virustotal_file_cli_tool.main()
+            virustotal_file_cli_tool.main()
             awaiting_valid_tool_choice = False
         elif user_option == '2':
             os.system('cls')
