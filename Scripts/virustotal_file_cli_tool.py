@@ -106,7 +106,13 @@ def main():
             print("Error: VIRUSTOTAL_API_KEY environment variable is not set.")
             print("Returning back to the tool page...")
             file_tool.File_tools()
-        file_path = input("Enter the file path of the file you wish to submit: ")
+        # File path error handling
+        while True:
+            file_path = input("Enter the file path of the file you wish to submit: ")
+            if os.path.exists(file_path):
+                break
+            else:
+                print("Error: File path", file_path, "not found!")
         vt_analysis_id = virustotal(file_path, VIRUSTOTAL_API_KEY)
         if vt_analysis_id:
             response_json = result_complete(vt_analysis_id, VIRUSTOTAL_API_KEY)
