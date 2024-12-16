@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import ip_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # AbuseIPDB API connection
@@ -41,6 +42,23 @@ def ip_results(ip_data):
         table.max_width["Result"] = 80
         print(table)
         table.clear_rows()
+        
+        # Collating results
+        result_log = {
+            "IP Address you entered": data.get('ipAddress', 'Unknown') ,
+            "Total number of reports:": str(data.get('totalReports', 'Unknown')) ,
+            "Last reported at": data.get('lastReportedAt', 'Unknown') ,
+            "Confidence of abuse": str(data.get('abuseConfidenceScore', 'Unknown')) ,
+            "ISP": data.get('isp', 'Unknown') ,
+            "Usage Type": data.get('usageType', 'Unknown') ,
+            "Hostname(s)": ', '.join(data.get('hostnames', ['Unknown'])) ,
+            "Domain": str(data.get('domain', 'Unknown')) ,
+            "Country code": str(data.get('countryCode', 'Unknown')) ,
+            "Tor node": str(data.get('isTor', 'Unknown')) 
+        }
+        
+        # Passing results into history feature
+        history_cli_tool.record_search("AbuseIPDB", data.get('ipAddress', 'Unknown'), result_log)
     else:
         print("No data found for this IP address.")  
 

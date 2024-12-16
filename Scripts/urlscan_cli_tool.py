@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import domain_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # URLScan API connection
@@ -98,6 +99,23 @@ def url_results(response_json, url):
     table.max_width["Result"] = 80
     print(table)
     table.clear_rows()
+    
+    # Collating results
+    result_log = {
+        "Submitted at": submitted_at,
+        "Completed at": completed_at,
+        "Title": title,
+        "URL": url,
+        "Hosting IP": ip,
+        "Server": server,
+        "Country": country,
+        "Malicious": malicious,
+        "Google safebrowsing": google_safebrowsing,
+        "Phishing": phishing
+    }
+    
+    # Passing results into history feature
+    history_cli_tool.record_search("URL Scan", url, result_log)
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the URLScan CLI tool ◄◄◄\n" + "\033[0m")

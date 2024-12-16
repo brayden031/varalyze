@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import file_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # VirusTotal API connection
@@ -72,6 +73,17 @@ def file_results(response_json, file_path):
     table.max_width["Result"] = 80
     print(table)
     table.clear_rows()
+    
+    # Collating results
+    result_log = {
+    "Total malicious": malicious,
+    "Total suspicious": suspicious,
+    "Total harmless": harmless,
+    "Total undetected": undetected
+    }
+     
+    # Passing results into history feature   
+    history_cli_tool.record_search("VirusTotal (file)", file_path, result_log)
         
     flagged_results = response_json['data']['attributes']['results']
     

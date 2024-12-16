@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import ip_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # iplocation API connection
@@ -34,6 +35,19 @@ def ip_results(ip_data, ip_address):
         table.max_width["Result"] = 80 
         print(table)
         table.clear_rows()
+        
+        # Collating results
+        result_log = {
+            "ISP": ip_data.get('isp', 'Unknown'),
+            "Country": ip_data.get('country_name', 'Unknown'),
+            "Country code": str(ip_data.get('country_code2', 'Unknown')),
+            "IP version": str(ip_data.get('ip_version', 'Unknown')),
+            "Responde code": str(ip_data.get('response_code', 'Unknown')),
+            "Response message": str(ip_data.get('response_message', 'Unknown')),
+        }
+        
+        # Passing results into history feature
+        history_cli_tool.record_search("IPLocation", ip_address, result_log)
         
 def main():
     print("\033[1m" + "\n►►► Welcome to the iplocation CLI tool ◄◄◄\n" + "\033[0m")

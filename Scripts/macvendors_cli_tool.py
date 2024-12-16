@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import mac_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # MAC vendor connection request 
@@ -29,6 +30,14 @@ def main():
             table.max_width["Result"] = 80
             print(table)
             table.clear_rows()
+            
+            # Collating results
+            result_log = {
+                "Vendor": str(MAC_vendor_result),
+            }
+            
+            # Passing results into history feature
+            history_cli_tool.record_search("MAC vendors", MAC_address, result_log)
             
             # Second loop for determining if the user would like to check another
             invalid_re_run = True

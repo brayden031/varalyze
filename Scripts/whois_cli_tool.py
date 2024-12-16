@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import ip_tool
+from features import history_cli_tool
 import varalyze_cli
 import whois
 
@@ -25,6 +26,24 @@ def whois_query_results(query):
         table.max_width["Result"] = 80
         print(table)
         table.clear_rows()
+        
+        # Collating results
+        result_log = {
+            "Domain name": str(query_results.get('domain_name') or 'Unknown'),
+            "Registrar": str(query_results.get('registrar', 'Unknown')),
+            "Creation date": str(query_results.get('creation_date', 'Unknown')),
+            "Creation date": str(query_results.get('expiration_date', 'Unknown')),
+            "Organisation": str(query_results.get('org', 'Unknown')),
+            "Address": str(query_results.get('address', 'Unknown')),
+            "City": str(query_results.get('city', 'Unknown')),
+            "State": str(query_results.get('state', 'Unknown')),
+            "Country": str(query_results.get('country', 'Unknown')),
+            "Postal code": str(query_results.get('postal_code', 'Unknown'))
+        }
+        
+        # Passing results into history feature 
+        history_cli_tool.record_search("WhoIS", query, result_log)
+        
     except Exception as e:
         print("Error encountered", e)
         

@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import domain_tool
+from features import history_cli_tool
 import varalyze_cli
 
 
@@ -76,6 +77,17 @@ def url_results(response_json, url):
     table.max_width["Result"] = 80 
     print(table)
     table.clear_rows()
+    
+    # Collating results
+    result_log = {
+        "Total malicious": malicious,
+        "Total suspicious": suspicious,
+        "Total harmless": harmless,
+        "Total undetected": undetected
+    }
+    
+    # Passing results into history feature    
+    history_cli_tool.record_search("VirusTotal", url, result_log)
 
     flagged_results = response_json['data']['attributes']['results']
     

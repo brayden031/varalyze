@@ -1,6 +1,7 @@
 #imports
 from shared_imports import *
 from tool_options import ip_tool
+from features import history_cli_tool
 import varalyze_cli
 
 # ipquality API connection
@@ -32,6 +33,19 @@ def ip_results(ip_data, ip_address):
         table.max_width["Result"] = 80
         print(table)
         table.clear_rows()
+        
+        # Collating results
+        result_log = {
+            "IP Quality score": str(ip_data.get('fraud_score', 'Unknown')),
+            "ISP": ip_data.get('ISP', 'Unknown'),
+            "VPN Connection": str(ip_data.get('vpn', 'Unknown')),
+            "Active VPN connection": str(ip_data.get('active_vpn', 'Unknown')),
+            "Tor Connection": str(ip_data.get('tor', 'Unknown')),
+            "Proxy": str(ip_data.get('proxy', 'Unknown')),
+        }
+        
+        # Passing results into history feature
+        history_cli_tool.record_search("IPQuality", ip_address, result_log)
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the ipquality CLI tool ◄◄◄\n" + "\033[0m")
