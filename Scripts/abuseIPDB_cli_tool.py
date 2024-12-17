@@ -58,7 +58,7 @@ def ip_results(ip_data):
         }
         
         # Passing results into history feature
-        history_cli_tool.record_search("AbuseIPDB", data.get('ipAddress', 'Unknown'), result_log)
+        history_cli_tool.record_search("AbuseIPDB", "IP", data.get('ipAddress', 'Unknown'), result_log)
     else:
         print("No data found for this IP address.")  
 

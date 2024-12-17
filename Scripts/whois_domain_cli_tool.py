@@ -44,7 +44,7 @@ def whois_query_results(query):
         }
         
         # Passing results into history feature
-        history_cli_tool.record_search("WhoIS (domain)", query, result_log)
+        history_cli_tool.record_search("WhoIS (domain)", "URL", query, result_log)
         
     except Exception as e:
         print("Error encountered", e)

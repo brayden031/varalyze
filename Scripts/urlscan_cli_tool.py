@@ -115,7 +115,7 @@ def url_results(response_json, url):
     }
     
     # Passing results into history feature
-    history_cli_tool.record_search("URL Scan", url, result_log)
+    history_cli_tool.record_search("URL Scan", "URL", url, result_log)
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the URLScan CLI tool ◄◄◄\n" + "\033[0m")

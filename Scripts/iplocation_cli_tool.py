@@ -47,7 +47,7 @@ def ip_results(ip_data, ip_address):
         }
         
         # Passing results into history feature
-        history_cli_tool.record_search("IPLocation", ip_address, result_log)
+        history_cli_tool.record_search("IPLocation", "IP", ip_address, result_log)
         
 def main():
     print("\033[1m" + "\n►►► Welcome to the iplocation CLI tool ◄◄◄\n" + "\033[0m")

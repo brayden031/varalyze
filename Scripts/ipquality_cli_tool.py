@@ -45,7 +45,7 @@ def ip_results(ip_data, ip_address):
         }
         
         # Passing results into history feature
-        history_cli_tool.record_search("IPQuality", ip_address, result_log)
+        history_cli_tool.record_search("IPQuality", "IP", ip_address, result_log)
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the ipquality CLI tool ◄◄◄\n" + "\033[0m")

@@ -83,7 +83,7 @@ def file_results(response_json, file_path):
     }
      
     # Passing results into history feature   
-    history_cli_tool.record_search("VirusTotal (file)", file_path, result_log)
+    history_cli_tool.record_search("VirusTotal (file)", "File", file_path, result_log)
         
     flagged_results = response_json['data']['attributes']['results']
     
