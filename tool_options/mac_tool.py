@@ -1,7 +1,7 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-from Scripts import macvendors_cli_tool
+from scripts import macvendors_cli_tool
 
 # function to decide which tool the user wishes to use
 def mac_tools():

@@ -82,8 +82,23 @@ def file_results(response_json, file_path):
     "Total undetected": undetected
     }
      
-    # Passing results into history feature   
-    history_cli_tool.record_search("VirusTotal (file)", "File", file_path, result_log)
+    # Comment feature
+    awaiting_comment = True
+    while awaiting_comment:
+        add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+        if add_comment == "y":
+            user_comment = input("Enter a comment (max 30 characters): ")
+            awaiting_comment = False
+            if len(user_comment) > 50:
+                user_comment = user_comment[:30]
+            elif add_comment == "n":
+                user_comment = ""
+                awaiting_comment = False
+            else:
+                print("Invalid option, please try again")
+        
+    # Passing results into history featuree   
+    history_cli_tool.record_search("VirusTotal (file)", "File", file_path, user_comment, result_log)
         
     flagged_results = response_json['data']['attributes']['results']
     

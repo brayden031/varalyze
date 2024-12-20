@@ -114,8 +114,23 @@ def url_results(response_json, url):
         "Phishing": phishing
     }
     
+    # Comment feature
+    awaiting_comment = True
+    while awaiting_comment:
+        add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+        if add_comment == "y":
+            user_comment = input("Enter a comment (max 30 characters): ")
+            awaiting_comment = False
+            if len(user_comment) > 50:
+                user_comment = user_comment[:30]
+            elif add_comment == "n":
+                user_comment = ""
+                awaiting_comment = False
+            else:
+                print("Invalid option, please try again")
+        
     # Passing results into history feature
-    history_cli_tool.record_search("URL Scan", "URL", url, result_log)
+    history_cli_tool.record_search("URL Scan", "URL", url, user_comment, result_log)
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the URLScan CLI tool ◄◄◄\n" + "\033[0m")

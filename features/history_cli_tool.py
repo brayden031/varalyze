@@ -21,12 +21,13 @@ def get_history():
         return []
     
 # Function that is called once a tool has ran successfully to store the search in the history file
-def record_search(tool_name, category_name, search_term, result):
+def record_search(tool_name, category_name, search_term, comment, result):
     entry = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "tool": tool_name,
         "category": category_name,
         "search_term": search_term,
+        "comment": comment,
         "result": result
     }
     
@@ -45,6 +46,7 @@ def display_entry_details(entry):
     table.add_row(["Tool", entry['tool']])
     table.add_row(["Category", entry['category']])
     table.add_row(["Search Term", entry['search_term']])
+    table.add_row(["Comment", entry['comment']])
     
     for key, value in entry['result'].items():
         table.add_row([key, value])
@@ -120,13 +122,13 @@ def display_history():
     
     # Formatting the results retrieved into the command line table
     log_table = PrettyTable()
-    log_table.field_names = ["Index", "Time", "Category", "Tool", "Search Term"]
+    log_table.field_names = ["Index", "Time", "Category", "Tool", "Search Term", "Comment"]
     
     category_counter = Counter()
     tool_counter = Counter()
 
     for index, entry in enumerate(history):
-        log_table.add_row([index + 1, Fore.GREEN + entry['timestamp'] + Style.RESET_ALL, Fore.GREEN + entry['category'] + Style.RESET_ALL, Fore.GREEN + entry['tool'] + Style.RESET_ALL, Fore.GREEN + entry['search_term'] + Style.RESET_ALL])
+        log_table.add_row([index + 1, Fore.GREEN + entry['timestamp'] + Style.RESET_ALL, Fore.GREEN + entry['category'] + Style.RESET_ALL, Fore.GREEN + entry['tool'] + Style.RESET_ALL, Fore.GREEN + entry['search_term'] + Style.RESET_ALL, Fore.BLUE + entry['comment'] + Style.RESET_ALL])
         category_counter[entry['category']] += 1
         tool_counter[entry['tool']] += 1
     
@@ -148,7 +150,7 @@ def main():
     history = display_history()
     if history:  # Proceed only if history is not empty
         try:
-            selection = int(input("\nEnter a search ID to view the associated results or type '0' to return to the home page: "))
+            selection = int(input("\nEnter a number to view the associated results or type '0' to return to the home page: "))
             entry_select(selection, history)
         except ValueError:
             print("Invalid input. Please enter a number.")

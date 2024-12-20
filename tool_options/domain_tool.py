@@ -1,9 +1,9 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-from Scripts import urlscan_cli_tool
-from Scripts import virustotal_cli_tool
-from Scripts import whois_domain_cli_tool
+from scripts import urlscan_cli_tool
+from scripts import virustotal_cli_tool
+from scripts import whois_domain_cli_tool
 
 # function to decide which tool the user wishes to use
 def domain_tools():

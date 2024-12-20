@@ -1,10 +1,10 @@
 # imports
 import varalyze_cli
 from shared_imports import *
-from Scripts import abuseIPDB_cli_tool
-from Scripts import whois_cli_tool
-from Scripts import ipquality_cli_tool
-from Scripts import iplocation_cli_tool
+from scripts import abuseIPDB_cli_tool
+from scripts import whois_cli_tool
+from scripts import ipquality_cli_tool
+from scripts import iplocation_cli_tool
 
 # function to decide which tool the user wishes to use
 def ip_tools():

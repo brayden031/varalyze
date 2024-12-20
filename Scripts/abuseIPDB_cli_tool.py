@@ -57,8 +57,23 @@ def ip_results(ip_data):
             "Tor node": str(data.get('isTor', 'Unknown')) 
         }
         
+        # Comment feature
+        awaiting_comment = True
+        while awaiting_comment:
+            add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+            if add_comment == "y":
+                user_comment = input("Enter a comment (max 30 characters): ")
+                awaiting_comment = False
+                if len(user_comment) > 50:
+                    user_comment = user_comment[:30]
+            elif add_comment == "n":
+                user_comment = ""
+                awaiting_comment = False
+            else:
+                print("Invalid option, please try again")
+        
         # Passing results into history feature
-        history_cli_tool.record_search("AbuseIPDB", "IP", data.get('ipAddress', 'Unknown'), result_log)
+        history_cli_tool.record_search("AbuseIPDB", "IP", data.get('ipAddress', 'Unknown'), user_comment, result_log)
     else:
         print("No data found for this IP address.")  
 
