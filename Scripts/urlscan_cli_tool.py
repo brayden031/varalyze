@@ -61,7 +61,7 @@ def result_complete(uuid):
             return None
 
 # Formatting the results retrieved into the command line    
-def url_results(response_json, url):
+def url_results(response_json, url, prompt_for_comment=True):
     
     stats = response_json
     
@@ -82,6 +82,7 @@ def url_results(response_json, url):
     google_safebrowsing = 'Yes' if stats.get('verdicts', {}).get('engines', {}).get('google_safebrowsing') else 'No'
     phishing = 'Yes' if stats.get('verdicts', {}).get('engines', {}).get('phishing') else 'No'
 
+    user_comment = ""
     print("\n▼ URLScan results ▼\n")
     table.field_names = ["Field", "Result"]
     table.add_row(["Submitted at", Fore.GREEN + submitted_at + Style.RESET_ALL])
@@ -115,22 +116,37 @@ def url_results(response_json, url):
     }
     
     # Comment feature
-    awaiting_comment = True
-    while awaiting_comment:
-        add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
-        if add_comment == "y":
-            user_comment = input("Enter a comment (max 30 characters): ")
-            awaiting_comment = False
-            if len(user_comment) > 50:
-                user_comment = user_comment[:30]
-            elif add_comment == "n":
-                user_comment = ""
-                awaiting_comment = False
-            else:
-                print("Invalid option, please try again")
+    if prompt_for_comment:
+            awaiting_comment = True
+            while awaiting_comment:
+                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                if add_comment == "y":
+                    user_comment = input("Enter a comment (max 30 characters): ")
+                    awaiting_comment = False
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+                elif add_comment == "n":
+                    user_comment = ""
+                    awaiting_comment = False
+                else:
+                    print("Invalid option, please try again")
         
     # Passing results into history feature
     history_cli_tool.record_search("URL Scan", "URL", url, user_comment, result_log)
+
+def multi(multi_ip_check):
+    try:
+        URLSCAN_API_KEY = os.environ["URLSCAN_API_KEY"]
+    except KeyError:
+        print("Error: URLSCAN_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = urlscan(multi_ip_check, URLSCAN_API_KEY)
+    if ip_data:
+        response_json = result_complete(ip_data)
+        if response_json:
+            url_results(response_json, multi_ip_check, prompt_for_comment=False)
+        return
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the URLScan CLI tool ◄◄◄\n" + "\033[0m")

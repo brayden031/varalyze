@@ -7,9 +7,10 @@ import whois
 
 # Domain version of WhoIS
 # Whois connection
-def whois_query_results(query):
+def whois_query_results(query, prompt_for_comment=True):
     try:
         query_results = whois.whois(query)
+        user_comment = ""
         print("\n▼ Whois results ▼\n")
         # Formatting the results retrieved into the command line
         table.field_names = ["Field", "Result"]
@@ -44,26 +45,32 @@ def whois_query_results(query):
         }
         
         # Comment feature
-        awaiting_comment = True
-        while awaiting_comment:
-            add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
-            if add_comment == "y":
-                user_comment = input("Enter a comment (max 30 characters): ")
-                awaiting_comment = False
-            if len(user_comment) > 50:
-                user_comment = user_comment[:30]
-            elif add_comment == "n":
-                user_comment = ""
-                awaiting_comment = False
-            else:
-                print("Invalid option, please try again")
+        if prompt_for_comment:
+            awaiting_comment = True
+            while awaiting_comment:
+                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                if add_comment == "y":
+                    user_comment = input("Enter a comment (max 30 characters): ")
+                    awaiting_comment = False
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+                elif add_comment == "n":
+                    user_comment = ""
+                    awaiting_comment = False
+                else:
+                    print("Invalid option, please try again")
         
         # Passing results into history feature
         history_cli_tool.record_search("WhoIS (domain)", "URL", query, user_comment, result_log)
         
     except Exception as e:
         print("Error encountered", e)
-        
+
+def multi(multi_ip_check):
+    ip_data = whois_query_results(multi_ip_check, prompt_for_comment=False)
+    if ip_data:
+        return
+
 def main():
     print("\033[1m" + "\n►►► Welcome to the Whois domain CLI tool ◄◄◄\n" + "\033[0m")
     # Overall while loop for tool being run

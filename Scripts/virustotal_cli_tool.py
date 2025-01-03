@@ -8,7 +8,7 @@ import varalyze_cli
 # VirusTotal API connection
 def virustotal(url, VIRUSTOTAL_API_KEY):
     headers = {
-        "x-apikey" : VIRUSTOTAL_API_KEY,
+        "x-apikey": VIRUSTOTAL_API_KEY,
         "Accept": "application/json"
     }
     params = {
@@ -60,7 +60,7 @@ def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id):
         time.sleep(10)
 
 # Formatting the results retrieved into the command line    
-def url_results(response_json, url):
+def url_results(response_json, url, prompt_for_comment=True):
     
     stats = response_json['data']['attributes']['stats']
     malicious = str(stats.get('malicious', 0))
@@ -68,6 +68,7 @@ def url_results(response_json, url):
     harmless = str(stats.get('harmless', 0))
     undetected = str(stats.get('undetected', 0))
     
+    user_comment = ""
     print("\n▼ VirusTotal results ▼\n")
     table.field_names = ["Field", "Result"]
     table.add_row(["Total malicious", Fore.GREEN + malicious + Style.RESET_ALL])
@@ -85,24 +86,6 @@ def url_results(response_json, url):
         "Total harmless": harmless,
         "Total undetected": undetected
     }
-    
-    # Comment feature
-    awaiting_comment = True
-    while awaiting_comment:
-        add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
-        if add_comment == "y":
-            user_comment = input("Enter a comment (max 30 characters): ")
-            awaiting_comment = False
-            if len(user_comment) > 50:
-                user_comment = user_comment[:30]
-            elif add_comment == "n":
-                user_comment = ""
-                awaiting_comment = False
-            else:
-                print("Invalid option, please try again")
-        
-    # Passing results into history feature    
-    history_cli_tool.record_search("VirusTotal", "URL", url, user_comment, result_log)
 
     flagged_results = response_json['data']['attributes']['results']
     
@@ -123,7 +106,40 @@ def url_results(response_json, url):
         print(table_vendor)
     else:
         print("No malicious or suspicious results found.")
-     
+
+    # Comment feature
+    if prompt_for_comment:
+            awaiting_comment = True
+            while awaiting_comment:
+                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                if add_comment == "y":
+                    user_comment = input("Enter a comment (max 30 characters): ")
+                    awaiting_comment = False
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+                elif add_comment == "n":
+                    user_comment = ""
+                    awaiting_comment = False
+                else:
+                    print("Invalid option, please try again")
+        
+    # Passing results into history feature    
+    history_cli_tool.record_search("VirusTotal", "URL", url, user_comment, result_log)
+
+def multi(multi_ip_check):
+    try:
+        VIRUSTOTAL_API_KEY = os.environ["VIRUSTOTAL_API_KEY"]
+    except KeyError:
+        print("Error: VIRUSTOTAL_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = virustotal(multi_ip_check, VIRUSTOTAL_API_KEY)
+    if ip_data:
+        response_json = result_complete(VIRUSTOTAL_API_KEY, ip_data)
+        if response_json:
+            url_results(response_json, multi_ip_check, prompt_for_comment=False)
+        return
+
 def main():
     print("\033[1m" + "\n►►► Welcome to the VirusTotal CLI tool ◄◄◄\n" + "\033[0m")
     # Overall while loop for tool being run
