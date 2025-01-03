@@ -23,9 +23,10 @@ def abuse_IPDB(ip_address, ABUSEIPDB_API_KEY):
         return None
 
 # Formatting the results retrieved into the command line
-def ip_results(ip_data):
+def ip_results(ip_data, prompt_for_comment=True):
     if 'data' in ip_data:
         data = ip_data['data']
+        user_comment = ""
         print("\n▼ AbuseIPDB results ▼\n")
         table.field_names = ["Field", "Result"]
         table.add_row(["IP Address you entered", Fore.GREEN + data.get('ipAddress', 'Unknown') + Style.RESET_ALL])
@@ -58,24 +59,23 @@ def ip_results(ip_data):
         }
         
         # Comment feature
-        awaiting_comment = True
-        while awaiting_comment:
-            add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
-            if add_comment == "y":
-                user_comment = input("Enter a comment (max 30 characters): ")
-                awaiting_comment = False
-                if len(user_comment) > 50:
-                    user_comment = user_comment[:30]
-            elif add_comment == "n":
-                user_comment = ""
-                awaiting_comment = False
-            else:
-                print("Invalid option, please try again")
-        
+        if prompt_for_comment:
+            awaiting_comment = True
+            while awaiting_comment:
+                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                if add_comment == "y":
+                    user_comment = input("Enter a comment (max 30 characters): ")
+                    awaiting_comment = False
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+                elif add_comment == "n":
+                    user_comment = ""
+                    awaiting_comment = False
+                else:
+                    print("Invalid option, please try again") 
+
         # Passing results into history feature
         history_cli_tool.record_search("AbuseIPDB", "IP", data.get('ipAddress', 'Unknown'), user_comment, result_log)
-    else:
-        print("No data found for this IP address.")  
 
 # Allows user to report the ip address they submitted if they wish to
 def reporting_ip(ip, category, comment, timestamp, ABUSEIPDB_API_KEY):
@@ -101,7 +101,19 @@ def reporting_ip(ip, category, comment, timestamp, ABUSEIPDB_API_KEY):
     except requests.exceptions.RequestException as e:
         print("An error has occured attempting to make the request:", e)
         return None
-        
+
+def multi(multi_ip_check):
+    try:
+        ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
+    except KeyError:
+        print("Error: ABUSEIPDB_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = abuse_IPDB(multi_ip_check, ABUSEIPDB_API_KEY)
+    if ip_data:
+        ip_results(ip_data, prompt_for_comment=False)
+        return
+
 def main():
     print("\033[1m" + "\n►►►►►►►►► Welcome to the AbuseIPDB CLI tool ◄◄◄◄◄◄◄◄◄\n" + "\033[0m")
     # Overall while loop for tool being run

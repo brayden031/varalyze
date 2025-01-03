@@ -18,10 +18,11 @@ def ipquality_connection(ip_address, IPQUALITY_API_KEY):
         return None
 
 # Formatting the results retrieved into the command line
-def ip_results(ip_data, ip_address):
+def ip_results(ip_data, ip_address, prompt_for_comment=True):
     if ip_data is None:
         print("No data found for this IP address you provided.")
     else:
+        user_comment = ""
         print("\n▼ IP Quality results ▼\n")
         table.field_names = ["Field", "Result"]
         table.add_row(["IP Quality score", Fore.GREEN + str(ip_data.get('fraud_score', 'Unknown')) + Style.RESET_ALL])
@@ -45,22 +46,35 @@ def ip_results(ip_data, ip_address):
         }
         
         # Comment feature
-        awaiting_comment = True
-        while awaiting_comment:
-            add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
-            if add_comment == "y":
-                user_comment = input("Enter a comment (max 30 characters): ")
-                awaiting_comment = False
-                if len(user_comment) > 50:
-                    user_comment = user_comment[:30]
-            elif add_comment == "n":
-                user_comment = ""
-                awaiting_comment = False
-            else:
-                print("Invalid option, please try again")
+        if prompt_for_comment:
+            awaiting_comment = True
+            while awaiting_comment:
+                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                if add_comment == "y":
+                    user_comment = input("Enter a comment (max 30 characters): ")
+                    awaiting_comment = False
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+                elif add_comment == "n":
+                    user_comment = ""
+                    awaiting_comment = False
+                else:
+                    print("Invalid option, please try again")
         
         # Passing results into history feature
         history_cli_tool.record_search("IPQuality", "IP", ip_address, user_comment, result_log)
+
+def multi(multi_ip_check):
+    try:
+        IPQUALITY_API_KEY = os.environ["IPQUALITY_API_KEY"]
+    except KeyError:
+        print("Error: IPQUALITY_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = ipquality_connection(multi_ip_check, IPQUALITY_API_KEY)
+    if ip_data:
+        ip_results(ip_data, multi_ip_check, prompt_for_comment=False)
+        return
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the ipquality CLI tool ◄◄◄\n" + "\033[0m")

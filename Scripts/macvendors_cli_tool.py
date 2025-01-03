@@ -52,7 +52,7 @@ def main():
                     print("Invalid option, please try again")
             
             # Passing results into history feature
-                history_cli_tool.record_search("MAC vendors", "MAC", MAC_address, user_comment, result_log)
+            history_cli_tool.record_search("MAC vendors", "MAC", MAC_address, user_comment, result_log)
             
             # Second loop for determining if the user would like to check another
             invalid_re_run = True

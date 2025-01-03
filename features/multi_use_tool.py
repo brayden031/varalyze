@@ -1,12 +1,12 @@
 # imports
 from shared_imports import *
-from Scripts import abuseIPDB_cli_tool
-from Scripts import whois_cli_tool
-from Scripts import iplocation_cli_tool
-from Scripts import ipquality_cli_tool
-from Scripts import urlscan_cli_tool
-from Scripts import virustotal_cli_tool
-from Scripts import whois_domain_cli_tool
+from scripts import abuseIPDB_cli_tool
+from scripts import whois_cli_tool
+from scripts import iplocation_cli_tool
+from scripts import ipquality_cli_tool
+from scripts import urlscan_cli_tool
+from scripts import virustotal_cli_tool
+from scripts import whois_domain_cli_tool
 import varalyze_cli
 
 def multi_ip():
