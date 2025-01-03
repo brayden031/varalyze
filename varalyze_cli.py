@@ -10,6 +10,7 @@ from tool_options import domain_tool
 from tool_options import file_tool
 from tool_options import mac_tool
 from features import history_cli_tool
+from features import multi_use_tool
 
 # function used anytime user wishes to exit the program
 def exit_program():
@@ -78,6 +79,10 @@ def main():
                 elif user_tool == '5':
                     os.system('cls')
                     history_cli_tool.main()
+                    awaiting_valid_choice = False
+                elif user_tool == '6':
+                    os.system('cls')
+                    multi_use_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '10':
                     exit_program()
