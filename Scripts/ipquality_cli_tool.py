@@ -64,6 +64,7 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True):
         # Passing results into history feature
         history_cli_tool.record_search("IPQuality", "IP", ip_address, user_comment, result_log)
 
+# Function used within the multi-use feature of program
 def multi(multi_ip_check):
     try:
         IPQUALITY_API_KEY = os.environ["IPQUALITY_API_KEY"]
@@ -75,6 +76,18 @@ def multi(multi_ip_check):
     if ip_data:
         ip_results(ip_data, multi_ip_check, prompt_for_comment=False)
         return
+
+# Function used within the report generation feature of program  
+def multi_data(multi_ip_check):
+    try:
+        IPQUALITY_API_KEY = os.environ["IPQUALITY_API_KEY"]
+    except KeyError:
+        print("Error: IPQUALITY_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = ipquality_connection(multi_ip_check, IPQUALITY_API_KEY)
+    if ip_data:
+        return ip_data
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the ipquality CLI tool ◄◄◄\n" + "\033[0m")

@@ -5,7 +5,7 @@ from features import history_cli_tool
 import varalyze_cli
 
 # URLScan API connection
-def urlscan(url, URLSCAN_API_KEY):
+def urlscan(url, URLSCAN_API_KEY, output_print=True):
     headers = {
         'API-Key': URLSCAN_API_KEY,
         'Content-Type': 'application/json',
@@ -25,10 +25,11 @@ def urlscan(url, URLSCAN_API_KEY):
         uuid = response_json.get('uuid')
         if uuid:
             scan_url = f"https://urlscan.io/result/{uuid}/"
-            print("")
-            print(f"URLScan has started proccessing the URL, this can take a few seconds...")
-            # Outputs scan result URL
-            print(f"Full scan details can be found at ►►► {scan_url} ◄◄◄") 
+            if output_print:
+                print("")
+                print(f"URLScan has started proccessing the URL, this can take a few seconds...")
+                # Outputs scan result URL
+                print(f"Full scan details can be found at ►►► {scan_url} ◄◄◄") 
         else:
             print("Failed to get a UUID from the scan submission.")
         return uuid
@@ -38,16 +39,17 @@ def urlscan(url, URLSCAN_API_KEY):
         return None
 
 # Function to attempt to retrieve completed scan
-def result_complete(uuid):
+def result_complete(uuid, output_print=True):
     id_url = f"https://urlscan.io/api/v1/result/{uuid}/"
-    print("\nURLScan has queued the check, this can take a few seconds...")
+    if output_print:
+        print("\nURLScan has queued the check, this can take a few seconds...")
 
     # Time delay whilst urlscan finishes processing
     time.sleep(20)
     while True:
         try:
             web_page_response = requests.get(id_url)
-            if web_page_response.status_code == 404:
+            if (web_page_response.status_code == 404 and output_print):
                 print("URLScan is proccessing the URL, this can take a few seconds...")
                 # Time delay before re-checking
                 time.sleep(20)
@@ -134,19 +136,35 @@ def url_results(response_json, url, prompt_for_comment=True):
     # Passing results into history feature
     history_cli_tool.record_search("URL Scan", "URL", url, user_comment, result_log)
 
-def multi(multi_ip_check):
+# Function used within the multi-use feature of program
+def multi(multi_url_check):
     try:
         URLSCAN_API_KEY = os.environ["URLSCAN_API_KEY"]
     except KeyError:
         print("Error: URLSCAN_API_KEY environment variable is not set.")
         print("Skipping this tool...")
         return
-    ip_data = urlscan(multi_ip_check, URLSCAN_API_KEY)
+    ip_data = urlscan(multi_url_check, URLSCAN_API_KEY, output_print=False)
     if ip_data:
-        response_json = result_complete(ip_data)
+        response_json = result_complete(ip_data, output_print=False)
         if response_json:
-            url_results(response_json, multi_ip_check, prompt_for_comment=False)
+            url_results(response_json, multi_url_check, prompt_for_comment=False)
         return
+
+# Function used within the report generation feature of program
+def multi_data(multi_url_check):
+    try:
+        URLSCAN_API_KEY = os.environ["URLSCAN_API_KEY"]
+    except KeyError:
+        print("Error: URLSCAN_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = urlscan(multi_url_check, URLSCAN_API_KEY, output_print=False)
+    if ip_data:
+        response_json = result_complete(ip_data, output_print=False)
+        if response_json:
+            return response_json
+    
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the URLScan CLI tool ◄◄◄\n" + "\033[0m")

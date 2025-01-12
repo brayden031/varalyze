@@ -33,7 +33,7 @@ def virustotal(url, VIRUSTOTAL_API_KEY):
         return None
 
 # Function to attempt to retrieve completed scan
-def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id):
+def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id, output_print=True):
     headers = {
         "x-apikey": VIRUSTOTAL_API_KEY,
         "Accept": "application/json"
@@ -52,9 +52,11 @@ def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id):
         if status == 'completed':
             return response_json
         elif status == 'queued':
-            print("VirusTotal has queued the API check, this can take a few seconds...")
+            if output_print:
+                print("VirusTotal has queued the API check, this can take a few seconds...")
         elif status == 'in_progress':
-            print("VirusTotal is still proccessing the URL, this can take a few seconds...")
+            if output_print:
+                print("VirusTotal is still proccessing the URL, this can take a few seconds...")
         
         # Time delay whilst VirusTotal finishes processing
         time.sleep(10)
@@ -126,19 +128,34 @@ def url_results(response_json, url, prompt_for_comment=True):
     # Passing results into history feature    
     history_cli_tool.record_search("VirusTotal", "URL", url, user_comment, result_log)
 
-def multi(multi_ip_check):
+# Function used within the multi-use feature of program
+def multi(multi_url_check):
     try:
         VIRUSTOTAL_API_KEY = os.environ["VIRUSTOTAL_API_KEY"]
     except KeyError:
         print("Error: VIRUSTOTAL_API_KEY environment variable is not set.")
         print("Skipping this tool...")
         return
-    ip_data = virustotal(multi_ip_check, VIRUSTOTAL_API_KEY)
+    ip_data = virustotal(multi_url_check, VIRUSTOTAL_API_KEY)
     if ip_data:
-        response_json = result_complete(VIRUSTOTAL_API_KEY, ip_data)
+        response_json = result_complete(VIRUSTOTAL_API_KEY, ip_data, output_print=False)
         if response_json:
-            url_results(response_json, multi_ip_check, prompt_for_comment=False)
+            url_results(response_json, multi_url_check, prompt_for_comment=False)
         return
+
+# Function used within the report generation feature of program
+def multi_data(multi_url_check):
+    try:
+        VIRUSTOTAL_API_KEY = os.environ["VIRUSTOTAL_API_KEY"]
+    except KeyError:
+        print("Error: VIRUSTOTAL_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = virustotal(multi_url_check, VIRUSTOTAL_API_KEY)
+    if ip_data:
+        response_json = result_complete(VIRUSTOTAL_API_KEY, ip_data, output_print=False)
+        if response_json:
+            return response_json
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the VirusTotal CLI tool ◄◄◄\n" + "\033[0m")

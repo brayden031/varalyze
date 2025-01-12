@@ -102,6 +102,7 @@ def reporting_ip(ip, category, comment, timestamp, ABUSEIPDB_API_KEY):
         print("An error has occured attempting to make the request:", e)
         return None
 
+# Function used within the multi-use feature of program
 def multi(multi_ip_check):
     try:
         ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
@@ -113,6 +114,18 @@ def multi(multi_ip_check):
     if ip_data:
         ip_results(ip_data, prompt_for_comment=False)
         return
+
+# Function used within the report generation feature of program
+def multi_data(multi_ip_check):
+    try:
+        ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
+    except KeyError:
+        print("Error: ABUSEIPDB_API_KEY environment variable is not set.")
+        print("Skipping this tool...")
+        return
+    ip_data = abuse_IPDB(multi_ip_check, ABUSEIPDB_API_KEY)
+    if ip_data:
+        return ip_data
 
 def main():
     print("\033[1m" + "\n►►►►►►►►► Welcome to the AbuseIPDB CLI tool ◄◄◄◄◄◄◄◄◄\n" + "\033[0m")

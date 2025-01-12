@@ -56,7 +56,7 @@ def whois_query_results(query, prompt_for_comment=True):
                     user_comment = ""
                     awaiting_comment = False
                 else:
-                    print("Invalid option, please try again")
+                    print("Invalid option, please try again") 
         
         # Passing results into history feature 
         history_cli_tool.record_search("WhoIS", "IP", query, user_comment, result_log)
@@ -64,10 +64,26 @@ def whois_query_results(query, prompt_for_comment=True):
     except Exception as e:
         print("Error encountered", e)
 
+# Function used within the multi-use feature of program
 def multi(multi_ip_check):
     ip_data = whois_query_results(multi_ip_check, prompt_for_comment=False)
     if ip_data:
         return
+
+# Function used within the report generation feature of program
+# Required an additional function as initial function handles both query and results together so needed to be split
+def whois_query_report(multi_ip_check):
+    try:
+        query_results = whois.whois(multi_ip_check)
+        return query_results
+    except Exception as e:
+        print("Error encountered", e)
+
+# Function used within the report generation feature of program     
+def multi_data(multi_ip_check):
+    ip_data = whois_query_report(multi_ip_check)
+    if ip_data:
+        return ip_data
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the Whois CLI tool ◄◄◄\n" + "\033[0m")

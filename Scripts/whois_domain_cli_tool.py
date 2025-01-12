@@ -66,10 +66,26 @@ def whois_query_results(query, prompt_for_comment=True):
     except Exception as e:
         print("Error encountered", e)
 
-def multi(multi_ip_check):
-    ip_data = whois_query_results(multi_ip_check, prompt_for_comment=False)
+# Function used within the multi-use feature of program
+def multi(multi_url_check):
+    ip_data = whois_query_results(multi_url_check, prompt_for_comment=False)
     if ip_data:
         return
+    
+# Function used within the report generation feature of program
+# Required an additional function as initial function handles both query and results together so needed to be split
+def whois_query_report(multi_url_check):
+    try:
+        query_results = whois.whois(multi_url_check)
+        return query_results
+    except Exception as e:
+        print("Error encountered", e)
+
+# Function used within the report generation feature of program     
+def multi_data(multi_url_check):
+    url_data = whois_query_report(multi_url_check)
+    if url_data:
+        return url_data
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the Whois domain CLI tool ◄◄◄\n" + "\033[0m")

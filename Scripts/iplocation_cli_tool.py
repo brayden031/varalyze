@@ -66,11 +66,18 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True):
         # Passing results into history feature
         history_cli_tool.record_search("IPLocation", "IP", ip_address, user_comment, result_log)
 
+# Function used within the multi-use feature of program
 def multi(multi_ip_check):
     ip_data = iplocation_connection(multi_ip_check)
     if ip_data:
         ip_results(ip_data, multi_ip_check, prompt_for_comment=False)
         return
+
+# Function used within the report generation feature of program  
+def multi_data(multi_ip_check):
+    ip_data = iplocation_connection(multi_ip_check)
+    if ip_data:
+        return ip_data
 
 def main():
     print("\033[1m" + "\n►►► Welcome to the iplocation CLI tool ◄◄◄\n" + "\033[0m")
