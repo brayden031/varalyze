@@ -13,6 +13,7 @@ from features import history_cli_tool
 from features import multi_use_tool
 from features import report_generation_tool
 from config import api_key_check
+from config import api_key_set
 
 # function used anytime user wishes to exit the program
 def exit_program():
@@ -93,6 +94,10 @@ def main():
                 elif user_tool == '8':
                     os.system('cls')
                     api_key_check.main()
+                    awaiting_valid_choice = False
+                elif user_tool == '9':
+                    os.system('cls')
+                    api_key_set.main()
                     awaiting_valid_choice = False
                 elif user_tool == '10':
                     exit_program()
