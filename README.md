@@ -27,6 +27,10 @@
 
 ---
 
+## 📟 Command line 
+
+![CLI Demo](assets/cli_demo.gif)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
