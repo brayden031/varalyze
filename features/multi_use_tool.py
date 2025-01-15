@@ -62,7 +62,8 @@ def multi_ip():
                         print(f"An error occurred: {e}")
                     
                 # After feature has been used presents the user with the option to use again or exit this part of the program
-                continue_choice = input("\nWould you like to use the multi-use feature again or return to the home page? \n\n1. Again \n2. Home\n\n")
+                print("Would you like to use the multi-use feature again or return to the home page? \n\n1. Again \n2. Home\n")
+                continue_choice = input("Answer: ")
                 if continue_choice == '1':
                     os.system('cls')
                     main()
@@ -108,7 +109,8 @@ def multi_url():
                         print(f"An error occurred: {e}")
                     
                 # After feature has been used presents the user with the option to use again or exit this part of the program
-                continue_choice = input("\nWould you like to use the multi-use feature again or return to the home page? \n\n1. Again \n2. Home\n\n")
+                print("Would you like to use the multi-use feature again or return to the home page? \n\n1. Again \n2. Home\n")
+                continue_choice = input("Answer: ")
                 if continue_choice == '1':
                     os.system('cls')
                     main()
