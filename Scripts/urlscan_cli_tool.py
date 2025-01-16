@@ -4,6 +4,8 @@ from tool_options import domain_tool
 from features import history_cli_tool
 import varalyze_cli
 
+screenshot_folder = 'urlscan_investigations'
+
 # URLScan API connection
 def urlscan(url, URLSCAN_API_KEY, output_print=True):
     headers = {
@@ -84,11 +86,32 @@ def url_results(response_json, url, prompt_for_comment=True):
     google_safebrowsing = 'Yes' if stats.get('verdicts', {}).get('engines', {}).get('google_safebrowsing') else 'No'
     phishing = 'Yes' if stats.get('verdicts', {}).get('engines', {}).get('phishing') else 'No'
 
+    # Retrieving site screenshot
+    screenshot_url = stats['task']['screenshotURL']
+    screenshot_response = requests.get(screenshot_url)
+
+    if screenshot_response.status_code == 200:
+        if not os.path.exists(screenshot_folder):
+            os.makedirs(screenshot_folder)
+
+        # Used to increment each saved file
+        search_number = 1
+        save_path = os.path.join(screenshot_folder, f'screenshot_{search_number}.png')
+        while os.path.exists(save_path):
+            search_number += 1
+            save_path = os.path.join(screenshot_folder, f'screenshot_{search_number}.png')
+        with open(save_path, 'wb') as file:
+            file.write(screenshot_response.content)
+            screenshot_save = "True"
+    else:
+        screenshot_save = "False"
+        
     user_comment = ""
     print("\n▼ URLScan results ▼\n")
     table.field_names = ["Field", "Result"]
     table.add_row(["Submitted at", Fore.GREEN + submitted_at + Style.RESET_ALL])
     table.add_row(["Completed at", Fore.GREEN + completed_at + Style.RESET_ALL])
+    table.add_row(["Screenshot collected", Fore.GREEN + screenshot_save + Style.RESET_ALL])
     table.add_row(["", ""])
     table.add_row(["Title", Fore.GREEN + title + Style.RESET_ALL])
     table.add_row(["URL", Fore.GREEN + url + Style.RESET_ALL])
