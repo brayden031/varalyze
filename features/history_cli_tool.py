@@ -27,7 +27,7 @@ def record_search(tool_name, category_name, search_term, comment, result):
         "tool": tool_name,
         "category": category_name,
         "search_term": search_term,
-        "comment": comment,
+        "comment": comment if comment else "",
         "result": result
     }
     

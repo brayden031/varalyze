@@ -62,7 +62,7 @@ def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id, output_print=True):
         time.sleep(10)
 
 # Formatting the results retrieved into the command line    
-def url_results(response_json, url, prompt_for_comment=True):
+def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     
     stats = response_json['data']['attributes']['stats']
     malicious = str(stats.get('malicious', 0))
@@ -70,7 +70,6 @@ def url_results(response_json, url, prompt_for_comment=True):
     harmless = str(stats.get('harmless', 0))
     undetected = str(stats.get('undetected', 0))
     
-    user_comment = ""
     print("\n▼ VirusTotal results ▼\n")
     table.field_names = ["Field", "Result"]
     table.add_row(["Total malicious", Fore.GREEN + malicious + Style.RESET_ALL])
@@ -129,7 +128,7 @@ def url_results(response_json, url, prompt_for_comment=True):
     history_cli_tool.record_search("VirusTotal", "URL", url, user_comment, result_log)
 
 # Function used within the multi-use feature of program
-def multi(multi_url_check):
+def multi(multi_url_check, comment):
     try:
         VIRUSTOTAL_API_KEY = os.environ["VIRUSTOTAL_API_KEY"]
     except KeyError:
@@ -140,7 +139,7 @@ def multi(multi_url_check):
     if ip_data:
         response_json = result_complete(VIRUSTOTAL_API_KEY, ip_data, output_print=False)
         if response_json:
-            url_results(response_json, multi_url_check, prompt_for_comment=False)
+            url_results(response_json, multi_url_check, prompt_for_comment=False, user_comment=comment)
         return
 
 # Function used within the report generation feature of program

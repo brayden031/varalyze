@@ -44,15 +44,22 @@ def multi_ip():
             if valid_selections:
                 # User input that will be passed into the multi function within the scripts
                 multi_ip_check = input("Enter an IP address: ")
-                    
+                bulk_comment_choice = input("Would you like to enter a comment for these searches (yes/no): ")
+                if bulk_comment_choice == "yes":
+                    user_comment = input("Enter comment: ")  
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30] 
+                
                 for choice in user_selections:
                     try:
                         # Get the tool/module corresponding to the user's choice
                         module = ip_tools.get(choice)
 
-                        if module:
+                        if (module and bulk_comment_choice == "yes"):
                             # Call the multi function from the users choice of tools
-                            module.multi(multi_ip_check)
+                            module.multi(multi_ip_check, user_comment)
+                        elif (module and bulk_comment_choice != "yes"):
+                            module.multi(multi_ip_check, None)
                         # Error handling
                         else:
                             print(f"Error: Invalid choice {choice}. Please choose a valid number.")
@@ -91,15 +98,22 @@ def multi_url():
             if valid_selections:
                 # User input that will be passed into the multi function within the scripts
                 multi_url_check = input("Enter a domain/URL: ")
-                    
+                bulk_comment_choice = input("Would you like to enter a comment for these searches (yes/no): ")
+                if bulk_comment_choice == "yes":
+                    user_comment = input("Enter comment: ")
+                    if len(user_comment) > 50:
+                        user_comment = user_comment[:30]
+  
                 for choice in user_selections:
                     try:
                         # Get the tool/module corresponding to the user's choice
                         module = url_tools.get(choice)
 
-                        if module:
+                        if (module and bulk_comment_choice == "yes"):
                             # Call the multi function from the users choice of tools
-                            module.multi(multi_url_check)
+                            module.multi(multi_url_check, user_comment)
+                        elif (module and bulk_comment_choice != "yes"):
+                            module.multi(multi_url_check, None)
                         # Error handling
                         else:
                             print(f"Error: Invalid choice {choice}. Please choose a valid number.")

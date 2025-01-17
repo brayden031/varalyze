@@ -23,10 +23,9 @@ def abuse_IPDB(ip_address, ABUSEIPDB_API_KEY):
         return None
 
 # Formatting the results retrieved into the command line
-def ip_results(ip_data, prompt_for_comment=True):
+def ip_results(ip_data, prompt_for_comment=True, user_comment=""):
     if 'data' in ip_data:
         data = ip_data['data']
-        user_comment = ""
         print("\n▼ AbuseIPDB results ▼\n")
         table.field_names = ["Field", "Result"]
         table.add_row(["IP Address you entered", Fore.GREEN + data.get('ipAddress', 'Unknown') + Style.RESET_ALL])
@@ -103,7 +102,7 @@ def reporting_ip(ip, category, comment, timestamp, ABUSEIPDB_API_KEY):
         return None
 
 # Function used within the multi-use feature of program
-def multi(multi_ip_check):
+def multi(multi_ip_check, comment):
     try:
         ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
     except KeyError:
@@ -112,7 +111,7 @@ def multi(multi_ip_check):
         return
     ip_data = abuse_IPDB(multi_ip_check, ABUSEIPDB_API_KEY)
     if ip_data:
-        ip_results(ip_data, prompt_for_comment=False)
+        ip_results(ip_data, prompt_for_comment=False, user_comment=comment)
         return
 
 # Function used within the report generation feature of program

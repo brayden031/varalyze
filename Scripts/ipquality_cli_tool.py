@@ -18,11 +18,10 @@ def ipquality_connection(ip_address, IPQUALITY_API_KEY):
         return None
 
 # Formatting the results retrieved into the command line
-def ip_results(ip_data, ip_address, prompt_for_comment=True):
+def ip_results(ip_data, ip_address, prompt_for_comment=True, user_comment=""):
     if ip_data is None:
         print("No data found for this IP address you provided.")
     else:
-        user_comment = ""
         print("\n▼ IP Quality results ▼\n")
         table.field_names = ["Field", "Result"]
         table.add_row(["IP Quality score", Fore.GREEN + str(ip_data.get('fraud_score', 'Unknown')) + Style.RESET_ALL])
@@ -65,7 +64,7 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True):
         history_cli_tool.record_search("IPQuality", "IP", ip_address, user_comment, result_log)
 
 # Function used within the multi-use feature of program
-def multi(multi_ip_check):
+def multi(multi_ip_check, comment):
     try:
         IPQUALITY_API_KEY = os.environ["IPQUALITY_API_KEY"]
     except KeyError:
@@ -74,7 +73,7 @@ def multi(multi_ip_check):
         return
     ip_data = ipquality_connection(multi_ip_check, IPQUALITY_API_KEY)
     if ip_data:
-        ip_results(ip_data, multi_ip_check, prompt_for_comment=False)
+        ip_results(ip_data, multi_ip_check, prompt_for_comment=False, user_comment=comment)
         return
 
 # Function used within the report generation feature of program  

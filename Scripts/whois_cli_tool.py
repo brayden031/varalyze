@@ -6,10 +6,9 @@ import varalyze_cli
 import whois
 
 # Whois connection
-def whois_query_results(query, prompt_for_comment=True):
+def whois_query_results(query, prompt_for_comment=True, user_comment=""):
     try:
         query_results = whois.whois(query)
-        user_comment = ""
         print("\n▼ Whois results ▼\n")
         # Formatting the results retrieved into the command line
         table.field_names = ["Field", "Result"]
@@ -65,8 +64,8 @@ def whois_query_results(query, prompt_for_comment=True):
         print("Error encountered", e)
 
 # Function used within the multi-use feature of program
-def multi(multi_ip_check):
-    ip_data = whois_query_results(multi_ip_check, prompt_for_comment=False)
+def multi(multi_ip_check, comment):
+    ip_data = whois_query_results(multi_ip_check, prompt_for_comment=False, user_comment=comment)
     if ip_data:
         return
 

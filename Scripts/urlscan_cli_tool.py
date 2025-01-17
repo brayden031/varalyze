@@ -65,7 +65,7 @@ def result_complete(uuid, output_print=True):
             return None
 
 # Formatting the results retrieved into the command line    
-def url_results(response_json, url, prompt_for_comment=True):
+def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     
     stats = response_json
     
@@ -106,7 +106,6 @@ def url_results(response_json, url, prompt_for_comment=True):
     else:
         screenshot_save = "False"
         
-    user_comment = ""
     print("\n▼ URLScan results ▼\n")
     table.field_names = ["Field", "Result"]
     table.add_row(["Submitted at", Fore.GREEN + submitted_at + Style.RESET_ALL])
@@ -160,7 +159,7 @@ def url_results(response_json, url, prompt_for_comment=True):
     history_cli_tool.record_search("URL Scan", "URL", url, user_comment, result_log)
 
 # Function used within the multi-use feature of program
-def multi(multi_url_check):
+def multi(multi_url_check, comment):
     try:
         URLSCAN_API_KEY = os.environ["URLSCAN_API_KEY"]
     except KeyError:
@@ -171,7 +170,7 @@ def multi(multi_url_check):
     if ip_data:
         response_json = result_complete(ip_data, output_print=False)
         if response_json:
-            url_results(response_json, multi_url_check, prompt_for_comment=False)
+            url_results(response_json, multi_url_check, prompt_for_comment=False, user_comment=comment)
         return
 
 # Function used within the report generation feature of program
