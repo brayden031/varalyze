@@ -2,6 +2,7 @@
 import varalyze_cli
 from shared_imports import *
 from scripts import virustotal_file_cli_tool
+from features import advanced_file_tool
 
 # function to decide which tool the user wishes to use
 def file_tools():
@@ -21,8 +22,8 @@ def file_tools():
 ║                                                                            ║
 ║       TOOLS                                                   OTHER        ║
 ║                                                                            ║
-║       1. VirusTotal (Malware detection, multi-engine analyis) 2. Home page ║
-║                                                               3. Exit      ║                   
+║       1. VirusTotal (Malware detection, multi-engine analyis) 3. Home page ║
+║       2. Advanced file investigation                          4. Exit      ║                   
 ║                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 """)
@@ -33,11 +34,15 @@ def file_tools():
             os.system('cls')
             virustotal_file_cli_tool.main()
             awaiting_valid_tool_choice = False
-        elif user_option == '2':
+        if user_option == '2':
+            os.system('cls')
+            advanced_file_tool.main()
+            awaiting_valid_tool_choice = False
+        elif user_option == '3':
             os.system('cls')
             varalyze_cli.main()
             break
-        elif user_option == '3':
+        elif user_option == '4':
             varalyze_cli.exit_program()
         else:
             print("\nError: Invalid choice. Please select from 1-3...\n")
