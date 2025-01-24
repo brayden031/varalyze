@@ -25,6 +25,26 @@
 - **Streamline & Automation**: Streamline & Automate intelligence gathering, correlation, and reporting.
 - **Comprehensive Reports**: Combine various threat intel tools to generate reports to aid security event triaging.
 
+<br>
+
+<div align="center">
+
+## Tools Available
+
+<img src="./assets/abuseipdb-logo.png" alt="Logo 1" width="120" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/whois_logo.png" alt="Logo 4" width="120" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/urlscan_logo.png" alt="Logo 3" width="120" height="100">&nbsp;&nbsp;&nbsp;
+
+<br>
+
+<img src="./assets/virustotal_logo.png" alt="Logo 2" width="140" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/ipquality_logo.png" alt="Logo 5" width="140" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/iplocation_logo.png" alt="Logo 6" width="190" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/macvendors_logo.png" alt="Logo 7" width="160" height="100">&nbsp;&nbsp;&nbsp;
+
+</div>
+<br>
+
 ---
 
 ## 📟 Command line 
