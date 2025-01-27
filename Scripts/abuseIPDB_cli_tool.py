@@ -19,7 +19,7 @@ def abuse_IPDB(ip_address, ABUSEIPDB_API_KEY):
         return web_page_response.json()
     # Throw request error if cannot successfully connect
     except requests.exceptions.RequestException as e:
-        print("An error has occured attempting to make the request:", e)
+        print("\nAn error has occured attempting to make the request:", e)
         return None
 
 # Formatting the results retrieved into the command line
@@ -98,7 +98,7 @@ def reporting_ip(ip, category, comment, timestamp, ABUSEIPDB_API_KEY):
         return web_page_response.json()
     # Throw request error if cannot successfully connect
     except requests.exceptions.RequestException as e:
-        print("An error has occured attempting to make the request:", e)
+        print("\nAn error has occured attempting to make the request:", e)
         return None
 
 # Function used within the multi-use feature of program

@@ -112,7 +112,7 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     if prompt_for_comment:
             awaiting_comment = True
             while awaiting_comment:
-                add_comment = input("Would you like to add a comment to this search? (enter y/n): ")
+                add_comment = input("\nWould you like to add a comment to this search? (enter y/n): ")
                 if add_comment == "y":
                     user_comment = input("Enter a comment (max 30 characters): ")
                     awaiting_comment = False

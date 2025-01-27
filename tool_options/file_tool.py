@@ -45,4 +45,4 @@ def file_tools():
         elif user_option == '4':
             varalyze_cli.exit_program()
         else:
-            print("\nError: Invalid choice. Please select from 1-3...\n")
+            print("\nError: Invalid choice. Please select from 1-4...\n")

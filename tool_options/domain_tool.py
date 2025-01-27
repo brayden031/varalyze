@@ -15,7 +15,7 @@ def domain_tools():
 ╠════════════════════════════════════════════════════════════════════════════╣
 ║                                                                            ║
 ║          Welcome to the Domain & URL tools. These tools will retrieve      ║
-║                useful details associated with an Domain/URL..              ║
+║                useful details associated with an Domain/URL ...            ║
 ║                                                                            ║
 ╠════════════════════════════════════════════════════════════════════════════╣
 ║                                                                            ║                                
