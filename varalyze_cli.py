@@ -54,10 +54,10 @@ def main():
 ║                                                                            ║
 ║        TOOL PAGES              FEATURES               OTHER                ║
 ║                                                                            ║
-║        1. IP Address           5. History             8. API Key Check     ║
-║        2. Domain & URL         6. Multi-use           9. API Key Config    ║
-║        3. File & Hash          7. Generate Report     10. Case Workflow    ║
-║        4. MAC Address                                 11. Exit             ║
+║        1. IP Address           5. Multi-use             9.  API Key Check  ║
+║        2. Domain & URL         6. Generate Report       10. API Key Config ║
+║        3. File & Hash          7. History               11. Exit           ║
+║        4. MAC Address          8. Case Workflow                            ║
 ║                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 """)
@@ -82,27 +82,27 @@ def main():
                     awaiting_valid_choice = False
                 elif user_tool == '5':
                     os.system('cls')
-                    history_cli_tool.main()
+                    multi_use_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '6':
                     os.system('cls')
-                    multi_use_tool.main()
+                    report_generation_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '7':
                     os.system('cls')
-                    report_generation_tool.main()
+                    history_cli_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '8':
                     os.system('cls')
-                    api_key_check.main()
+                    case_workflow_tool.main()
                     awaiting_valid_choice = False
                 elif user_tool == '9':
                     os.system('cls')
-                    api_key_set.main()
+                    api_key_check.main()
                     awaiting_valid_choice = False
                 elif user_tool == '10':
                     os.system('cls')
-                    case_workflow_tool.main()
+                    api_key_set.main()
                     awaiting_valid_choice = False
                 elif user_tool == '11':
                     exit_program()

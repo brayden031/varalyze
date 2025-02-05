@@ -157,14 +157,27 @@ def multi_url_report(multi_url_check):
     return results
     
 def main():
-    print("\033[1m" + "\n►►►►►►►►► Welcome to the multi-use page ◄◄◄◄◄◄◄◄◄\n" + "\033[0m")
-    print("""▼ Choose a category from the list below to begin your investigations ▼
-1. IP Address
-2. Domain / URL
-
-3. Return to home page
-4. Exit\n""")
-    
+    print("""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                              Multi-use feature                             ║
+║                                                                            ║ 
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║          Welcome to the multi-use tool. This feature can be used to        ║
+║       automate threat intel gathering for an IP address or Domain/URL ...  ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║              ▼ Choose an option from the list below to begin ▼             ║
+║                                                                            ║
+║                    TOOLS                          OTHER                    ║
+║                                                                            ║
+║                    1. IP Address                  3. Home page             ║
+║                    2. Domain/URL                  4. Exit                  ║               
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+""")
     awaiting_valid_category = True
     while awaiting_valid_category:
         user_tool = input("Enter the number you wish to select: ")
@@ -177,8 +190,7 @@ def main():
             varalyze_cli.main()
         elif user_tool == '4':
             varalyze_cli.exit_program()
-            return
-        
+            return     
         else:
             print("\nError: Invalid choice. Please select from 1-4...\n")
             

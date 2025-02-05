@@ -65,8 +65,28 @@ def log_activity(data):
 
 
 def main():
-    print("\033[1m" + "\n►►►►►►►►► Welcome to the case workflow tool ◄◄◄◄◄◄◄◄◄\n" + "\033[0m")
-    print("- This feature allows you to initate a session which records all activity into a single file.")
+    print("""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                               Workflow feature                             ║
+║                                                                            ║ 
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║          Welcome to the workflow tool. This feature can be used to         ║
+║     initiate a session which will record all program activity into a file  ║
+║                         for case management purposes.                      ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║               ▼ Choose an option from the list below to begin ▼            ║
+║                                                                            ║
+║                    TOOLS                          OTHER                    ║
+║                                                                            ║
+║                    1. Initiate session            3. Home page             ║    
+║                    2. End session                 4. Exit                  ║               
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+""")
     time.sleep(1)
     intialize_investigation = folder_creation()
     report_path = file_creation(intialize_investigation)

@@ -290,15 +290,27 @@ def report_generation_url(varalyze_score, indicators):
     return report 
 
 def main():
-    print("\033[1m" + "\n►►►►►►►►► Welcome to the report generation page ◄◄◄◄◄◄◄◄◄\n" + "\033[0m")
-    print("""▼ Choose a category from the list below to begin your investigations ▼
-          
-1. IP Address
-2. Domain / URL
-
-3. Return to home page
-4. Exit\n""")
-    
+    print("""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                          Report generation feature                         ║
+║                                                                            ║ 
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║      Welcome to the report generation tool. This feature can be used to    ║
+║          automate and produce comprehensive threat intel reports ...       ║
+║                                                                            ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║                                
+║              ▼ Choose an option from the list below to begin ▼             ║
+║                                                                            ║
+║                    TOOLS                          OTHER                    ║
+║                                                                            ║
+║                    1. IP Address                  3. Home page             ║
+║                    2. Domain/URL                  4. Exit                  ║               
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+""")
     awaiting_valid_category = True
     while awaiting_valid_category:
         user_tool = input("Enter the number you wish to select: ")
