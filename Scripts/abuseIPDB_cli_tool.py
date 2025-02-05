@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import ip_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 # AbuseIPDB API connection
@@ -56,6 +57,10 @@ def ip_results(ip_data, prompt_for_comment=True, user_comment=""):
             "Country code": str(data.get('countryCode', 'Unknown')) ,
             "Tor node": str(data.get('isTor', 'Unknown')) 
         }
+        
+        if case_workflow_tool.session_active:  
+            case_workflow_tool.log_activity("\nAbuseIPDB IP address results:\n")
+            case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
         
         # Comment feature
         if prompt_for_comment:

@@ -12,6 +12,7 @@ from tool_options import mac_tool
 from features import history_cli_tool
 from features import multi_use_tool
 from features import report_generation_tool
+from features import case_workflow_tool
 from config import api_key_check
 from config import api_key_set
 
@@ -55,8 +56,8 @@ def main():
 ║                                                                            ║
 ║        1. IP Address           5. History             8. API Key Check     ║
 ║        2. Domain & URL         6. Multi-use           9. API Key Config    ║
-║        3. File & Hash          7. Generate Report     10. Exit             ║
-║        4. MAC Address                                                      ║
+║        3. File & Hash          7. Generate Report     10. Case Workflow    ║
+║        4. MAC Address                                 11. Exit             ║
 ║                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 """)
@@ -100,6 +101,10 @@ def main():
                     api_key_set.main()
                     awaiting_valid_choice = False
                 elif user_tool == '10':
+                    os.system('cls')
+                    case_workflow_tool.main()
+                    awaiting_valid_choice = False
+                elif user_tool == '11':
                     exit_program()
                 else:
                     print("\nError: Invalid choice. Please select from 1-10...\n")               
