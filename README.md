@@ -29,9 +29,9 @@
 
 <div align="center">
 
-## Tools Available
+## TOOLS AVAILABLE
 
-<img src="./assets/abuseipdb-logo.png" alt="Logo 1" width="120" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/abuseipdb-logo.png" alt="Logo 1" width="110" height="100">&nbsp;&nbsp;&nbsp;
 <img src="./assets/whois_logo.png" alt="Logo 4" width="120" height="100">&nbsp;&nbsp;&nbsp;
 <img src="./assets/urlscan_logo.png" alt="Logo 3" width="120" height="100">&nbsp;&nbsp;&nbsp;
 
@@ -39,8 +39,8 @@
 
 <img src="./assets/virustotal_logo.png" alt="Logo 2" width="140" height="100">&nbsp;&nbsp;&nbsp;
 <img src="./assets/ipquality_logo.png" alt="Logo 5" width="140" height="100">&nbsp;&nbsp;&nbsp;
-<img src="./assets/iplocation_logo.png" alt="Logo 6" width="190" height="100">&nbsp;&nbsp;&nbsp;
 <img src="./assets/macvendors_logo.png" alt="Logo 7" width="160" height="100">&nbsp;&nbsp;&nbsp;
+<img src="./assets/iplocation_logo.png" alt="Logo 6" width="200" height="100">&nbsp;&nbsp;&nbsp;
 
 </div>
 <br>
