@@ -90,14 +90,14 @@ def display_entry_details(entry):
 def entry_select(selection, history):
     running_tool = True
     while running_tool:
-        if selection == 0:
+        if selection == "exit":
             print("Returning to home page..")
             time.sleep(2)
             os.system('cls')
             running_tool = False
             varalyze_cli.main()
-        elif 1 <= selection <= len(history):
-            selected_entry = history[selection - 1]
+        elif selection.isdigit() and 1 <= int(selection) <= len(history):
+            selected_entry = history[int(selection) - 1]
             display_entry_details(selected_entry)
         else:
             os.system('cls')
@@ -110,7 +110,7 @@ def display_history():
     
     # Check if the history file exists (has a scan been run) else not an accessible feature yet
     if not history:
-        print("ⓘ Note: History log does not exist, a history file will be initialized after running a tool for the first time. ⓘ\n")
+        print("ⓘ  Note: History log does not exist, a history file will be initialized after running a tool for the first time. ⓘ\n")
         print("Returning to home page..")
         time.sleep(6)
         os.system('cls')
@@ -149,7 +149,7 @@ def main():
     history = display_history()
     if history:  # Proceed only if history is not empty
         try:
-            selection = int(input("\nEnter a number to view the associated results or type '0' to return to the home page: "))
+            selection = input("\nEnter a number to view the associated results or type 'exit' to return to the home page: ")
             entry_select(selection, history)
         except ValueError:
             print("Invalid input. Please enter a number.")
