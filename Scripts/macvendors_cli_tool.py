@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import mac_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 # MAC vendor connection request 
@@ -35,6 +36,10 @@ def main():
             result_log = {
                 "Vendor": str(MAC_vendor_result),
             }
+            
+            if case_workflow_tool.session_active:  
+                case_workflow_tool.log_activity("\nMACVendors result:\n")
+                case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
             
             # Comment feature
             awaiting_comment = True

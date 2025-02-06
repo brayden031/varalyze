@@ -111,7 +111,7 @@ def main():
             os.system('cls')
             varalyze_cli.main()
             break
-        elif user_option == '5':
+        elif user_option == '4':
             varalyze_cli.exit_program()
         else:
             print("\nError: Invalid choice. Please select from 1-4...\n")

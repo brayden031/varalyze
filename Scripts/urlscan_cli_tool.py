@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import domain_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 screenshot_folder = 'urlscan_investigations'
@@ -138,6 +139,10 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
         "Google safebrowsing": google_safebrowsing,
         "Phishing": phishing
     }
+    
+    if case_workflow_tool.session_active:  
+            case_workflow_tool.log_activity("\nURLScan results:\n")
+            case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
     
     # Comment feature
     if prompt_for_comment:

@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import file_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 # VirusTotal API connection
@@ -82,6 +83,10 @@ def file_results(response_json, file_path):
     "Total undetected": undetected
     }
      
+    if case_workflow_tool.session_active:  
+        case_workflow_tool.log_activity("\nVirusTotal file results:\n")
+        case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
+            
     # Comment feature
     awaiting_comment = True
     while awaiting_comment:

@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import ip_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 # ipquality API connection
@@ -43,6 +44,10 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True, user_comment=""):
             "Tor Connection": str(ip_data.get('tor', 'Unknown')),
             "Proxy": str(ip_data.get('proxy', 'Unknown')),
         }
+        
+        if case_workflow_tool.session_active:  
+            case_workflow_tool.log_activity("\nIPQuality IP address results:\n")
+            case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
         
         # Comment feature
         if prompt_for_comment:

@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import domain_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 import whois
 
@@ -42,6 +43,10 @@ def whois_query_results(query, prompt_for_comment=True, user_comment=""):
             "Country": str(query_results.get('country', 'Unknown')),
             "Postal code": str(query_results.get('postal_code', 'Unknown'))
         }
+        
+        if case_workflow_tool.session_active:  
+            case_workflow_tool.log_activity("\Whois domain results:\n")
+            case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
         
         # Comment feature
         if prompt_for_comment:

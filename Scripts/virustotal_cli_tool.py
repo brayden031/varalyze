@@ -2,6 +2,7 @@
 from shared_imports import *
 from tool_options import domain_tool
 from features import history_cli_tool
+from features import case_workflow_tool
 import varalyze_cli
 
 
@@ -88,6 +89,10 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
         "Total undetected": undetected
     }
 
+    if case_workflow_tool.session_active:  
+            case_workflow_tool.log_activity("\nVirusTotal domain results:\n")
+            case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
+    
     flagged_results = response_json['data']['attributes']['results']
     
     # Secondary table that outputs if any vendors have flagged the domain/url as malicious or suspicious
