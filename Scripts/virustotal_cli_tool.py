@@ -111,7 +111,7 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     if reports_found:
         print(table_vendor)
     else:
-        print("No malicious or suspicious results found.")
+        print("No malicious or suspicious results found.\n")
 
     # Comment feature
     if prompt_for_comment:

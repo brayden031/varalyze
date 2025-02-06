@@ -35,7 +35,7 @@ def ip_results(ip_data, prompt_for_comment=True, user_comment=""):
         table.add_row(["Confidence of abuse", Fore.GREEN + str(data.get('abuseConfidenceScore', 'Unknown')) + Style.RESET_ALL])
         table.add_row(["", ""])
         table.add_row(["ISP", Fore.GREEN + data.get('isp', 'Unknown') + Style.RESET_ALL])
-        table.add_row(["Usage Type", Fore.GREEN + data.get('usageType', 'Unknown') + Style.RESET_ALL])
+        table.add_row(["Usage Type", Fore.GREEN + str(data.get('usageType', 'Unknown')) + Style.RESET_ALL])
         table.add_row(["Hostname(s)", Fore.GREEN + ', '.join(data.get('hostnames', ['Unknown'])) + Style.RESET_ALL])
         table.add_row(["Domain", Fore.GREEN + str(data.get('domain', 'Unknown')) + Style.RESET_ALL])
         table.add_row(["Country code", Fore.GREEN + str(data.get('countryCode', 'Unknown')) + Style.RESET_ALL])
