@@ -25,8 +25,9 @@ def ip_score_calculation(tool_results):
             is_tor = abuseIPDB_data.get("isTor", False)
 
             # Scoring logic for AbuseIPDB data
-            varalyze_score += confidence_score * 0.4  # Weighted confidence score
-            indicators.append(f"AbuseIPDB Confidence Score: {confidence_score}")
+            varalyze_score += confidence_score * 0.4
+            if varalyze_score > 20:
+                indicators.append(f"AbuseIPDB Confidence Score: {confidence_score}")
             if total_reports > 10:
                 varalyze_score += 10
                 indicators.append("Reported several times on AbuseIPDB (10+)")
@@ -79,7 +80,7 @@ def ip_score_calculation(tool_results):
         if ip_country_code and whois_country_code and ip_country_code != whois_country_code:
             varalyze_score += 10
             indicators.append("Mismatch observed between IPLocation and whoIS")
-        if (whois_country_code == "RU" or "CN" or "NK" or "IR"):
+        if whois_country_code in {"RU", "CN", "NK", "IR"}:
             varalyze_score += 10
             indicators.append("High risk country")
             

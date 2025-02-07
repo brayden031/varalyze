@@ -35,9 +35,7 @@ def file_tools():
             virustotal_file_cli_tool.main()
             awaiting_valid_tool_choice = False
         if user_option == '2':
-            os.system('cls')
-            advanced_file_tool.main()
-            awaiting_valid_tool_choice = False
+            print("\nNote: This tool is still under development and will be available in future releases.\n")
         elif user_option == '3':
             os.system('cls')
             varalyze_cli.main()

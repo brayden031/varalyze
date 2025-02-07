@@ -107,7 +107,7 @@ def main():
                 elif user_tool == '11':
                     exit_program()
                 else:
-                    print("\nError: Invalid choice. Please select from 1-10...\n")               
+                    print("\nError: Invalid choice. Please select from 1-11...\n")               
             home_page = False
     
 if __name__ == "__main__":
