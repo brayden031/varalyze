@@ -2,4 +2,4 @@ requests
 colorama
 prettytable
 tqdm
-whois
+python-whois
