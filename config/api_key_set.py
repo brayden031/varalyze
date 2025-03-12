@@ -6,7 +6,7 @@ def api_key_set():
     for key in api_keys:
         value = os.getenv(key)
         if value is None:
-            set_key = input(f"{key} not set. Please enter your API key or 'skip' if you don't wish to set this tool up:")
+            set_key = input(f"{key} not set. Please enter your API key or 'skip' if you don't wish to set this tool up: ")
             if set_key == 'skip':
                 continue
             os.environ[key] = set_key
