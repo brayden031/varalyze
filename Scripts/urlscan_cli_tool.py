@@ -52,8 +52,9 @@ def result_complete(uuid, output_print=True):
     while True:
         try:
             web_page_response = requests.get(id_url)
-            if (web_page_response.status_code == 404 and output_print):
-                print("URLScan is proccessing the URL, this can take a few seconds...")
+            if web_page_response.status_code == 404:
+                if output_print:
+                    print("URLScan is proccessing the URL, this can take a few seconds...")
                 # Time delay before re-checking
                 time.sleep(20)
                 continue
