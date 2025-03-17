@@ -43,7 +43,7 @@ def whois_query_results(query, prompt_for_comment=True, user_comment=""):
         }
         
         if case_workflow_tool.session_active:  
-            case_workflow_tool.log_activity("\Whois IP address results:\n")
+            case_workflow_tool.log_activity("\nWhois IP address results:\n")
             case_workflow_tool.log_activity(json.dumps(result_log, indent=4))
         
         # Comment feature

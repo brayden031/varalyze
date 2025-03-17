@@ -23,6 +23,7 @@ def ip_score_calculation(tool_results):
             confidence_score = abuseIPDB_data.get("abuseConfidenceScore", 0)
             total_reports = abuseIPDB_data.get("totalReports", 0)
             is_tor = abuseIPDB_data.get("isTor", False)
+            abuse_country_code = abuseIPDB_data.get("countryCode")
 
             # Scoring logic for AbuseIPDB data
             varalyze_score += confidence_score * 0.4
@@ -46,10 +47,12 @@ def ip_score_calculation(tool_results):
             bot_status = ipquality_data.get("bot_status", False)
             
             proxy_active = ipquality_data.get("proxy", False)
-            indicators.append("Using a proxy")
+            if proxy_active:
+                indicators.append("Using a proxy")
             
             vpn_active = ipquality_data.get("vpn", False)
-            indicators.append("Part of VPN network")
+            if vpn_active:
+                indicators.append("Part of VPN network")
             
             # Scoring logic for IPQuality
             varalyze_score += fraud_score * 0.3 
@@ -80,7 +83,7 @@ def ip_score_calculation(tool_results):
         if ip_country_code and whois_country_code and ip_country_code != whois_country_code:
             varalyze_score += 10
             indicators.append("Mismatch observed between IPLocation and whoIS")
-        if whois_country_code in {"RU", "CN", "NK", "IR"}:
+        if whois_country_code or abuse_country_code in {"RU", "CN", "NK", "IR"}:
             varalyze_score += 10
             indicators.append("High risk country")
             
@@ -89,7 +92,7 @@ def ip_score_calculation(tool_results):
             time.sleep(0.04)
         
         # Restrict varalyze score (can exceed 100 incase of missing data so it still gives accurate scoring)
-        varalyze_score = min(varalyze_score, 100)
+        varalyze_score = round(min(varalyze_score, 100), 2)
         # Call report function to structure concatenated data
         return report_generation_ip(varalyze_score, indicators)
 

@@ -48,15 +48,17 @@ def result_complete(uuid, output_print=True):
         print("\nURLScan has queued the check, this can take a few seconds...")
 
     # Time delay whilst urlscan finishes processing
-    time.sleep(20)
+    delay, poll_count = 5, 0
     while True:
         try:
             web_page_response = requests.get(id_url)
             if web_page_response.status_code == 404:
-                if output_print:
+                poll_count += 1
+                if output_print and poll_count % 3 == 0:
                     print("URLScan is proccessing the URL, this can take a few seconds...")
                 # Time delay before re-checking
-                time.sleep(20)
+                time.sleep(delay)
+                delay = min(delay + 2, 20)
                 continue
 
             web_page_response.raise_for_status()
@@ -109,6 +111,7 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
         screenshot_save = "False"
         
     print("\n▼ URLScan results ▼\n")
+    print("Note: Collected screenshots can be found located in the varalyze directory under a folder named 'investigations'")
     table.field_names = ["Field", "Result"]
     table.add_row(["Submitted at", Fore.GREEN + submitted_at + Style.RESET_ALL])
     table.add_row(["Completed at", Fore.GREEN + completed_at + Style.RESET_ALL])

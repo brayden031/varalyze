@@ -40,6 +40,7 @@ def result_complete(vt_analysis_id, VIRUSTOTAL_API_KEY):
     id_url = f'https://www.virustotal.com/api/v3/analyses/{vt_analysis_id}'
     
     # Querying web page status
+    delay, poll_count = 5, 0
     while True:
         web_page_response = requests.get(id_url, headers=headers)
         if web_page_response.status_code == 200:
@@ -47,9 +48,12 @@ def result_complete(vt_analysis_id, VIRUSTOTAL_API_KEY):
             if analysis_status == 'completed':
                 return web_page_response.json()
             else:
-                print("VirusTotal is still proccessing the File, this can take a few seconds...")
-                # Time delay whilst VirusTotal finishes processing
-                time.sleep(30)
+                poll_count += 1
+                if poll_count % 3 == 0:
+                    print("VirusTotal is still proccessing the File, this can take a few seconds...")
+                # Time delay before re-checking
+                time.sleep(delay)
+                delay = min(delay + 2, 20)
         else:
             print(f"VirusTotal encountered an error retrieving analysis results: {web_page_response.status_code}")
             print(web_page_response.text)
@@ -67,6 +71,7 @@ def file_results(response_json, file_path):
     
     print("\n▼ VirusTotal results ▼\n ")
     table.field_names = ["Field", "Result"]
+    table.align["Field"] = "l"
     table.add_row(["Total malicious", Fore.GREEN + malicious + Style.RESET_ALL])
     table.add_row(["Total suspicious", Fore.GREEN + suspicious + Style.RESET_ALL])
     table.add_row(["Total harmless", Fore.GREEN + harmless + Style.RESET_ALL])
@@ -170,7 +175,7 @@ def main():
                         invalid_exit = False
                         running_tool = False
                         os.system('cls')
-                        file_tool.File_tools()
+                        file_tool.file_tools()
                     elif exit_tool == "home":
                         invalid_exit = False
                         running_tool = False

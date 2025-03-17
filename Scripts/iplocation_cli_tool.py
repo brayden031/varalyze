@@ -31,7 +31,7 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True, user_comment=""):
         table.add_row(["Country code", Fore.GREEN + str(ip_data.get('country_code2', 'Unknown')) + Style.RESET_ALL])
         table.add_row(["IP version", Fore.GREEN + str(ip_data.get('ip_version', 'Unknown')) + Style.RESET_ALL])
         # Site will produce 200 status even on invalid entries so getting the response parameter shows if it was an actual valid query
-        table.add_row(["Responde code", Fore.GREEN + str(ip_data.get('response_code', 'Unknown')) + Style.RESET_ALL])
+        table.add_row(["Response code", Fore.GREEN + str(ip_data.get('response_code', 'Unknown')) + Style.RESET_ALL])
         table.add_row(["Response message", Fore.GREEN + str(ip_data.get('response_message', 'Unknown')) + Style.RESET_ALL])
         table.max_width["Result"] = 80 
         print(table)
@@ -43,7 +43,7 @@ def ip_results(ip_data, ip_address, prompt_for_comment=True, user_comment=""):
             "Country": ip_data.get('country_name', 'Unknown'),
             "Country code": str(ip_data.get('country_code2', 'Unknown')),
             "IP version": str(ip_data.get('ip_version', 'Unknown')),
-            "Responde code": str(ip_data.get('response_code', 'Unknown')),
+            "Response code": str(ip_data.get('response_code', 'Unknown')),
             "Response message": str(ip_data.get('response_message', 'Unknown')),
         }
         

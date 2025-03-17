@@ -43,6 +43,7 @@ def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id, output_print=True):
     id_url = f"https://www.virustotal.com/api/v3/analyses/{vt_analysis_id}"
     
     # Querying web page status
+    delay, poll_count = 5, 0
     while True:
         web_page_response = requests.get(id_url, headers=headers)
         web_page_response.raise_for_status()
@@ -52,29 +53,31 @@ def result_complete(VIRUSTOTAL_API_KEY, vt_analysis_id, output_print=True):
     
         if status == 'completed':
             return response_json
-        elif status == 'queued':
-            if output_print:
-                print("VirusTotal has queued the API check, this can take a few seconds...")
-        elif status == 'in_progress':
-            if output_print:
-                print("VirusTotal is still proccessing the URL, this can take a few seconds...")
-        
-        # Time delay whilst VirusTotal finishes processing
-        time.sleep(10)
-
+        elif status in ['queued', 'in_progress']:
+            poll_count += 1
+            if output_print and poll_count % 3 == 0:
+                print("VirusTotal is still processing the URL, please wait...")
+            # Time delay before re-checking
+            time.sleep(delay)
+            delay = min(delay + 2, 20)
+                   
 # Formatting the results retrieved into the command line    
 def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     
     stats = response_json['data']['attributes']['stats']
-    malicious = str(stats.get('malicious', 0))
-    suspicious = str(stats.get('suspicious', 0))
+    malicious = stats.get('malicious', 0)
+    suspicious = stats.get('suspicious', 0)
     harmless = str(stats.get('harmless', 0))
     undetected = str(stats.get('undetected', 0))
     
+    malicious_color = Fore.RED if malicious > 5 else Fore.GREEN
+    suspicious_color = Fore.YELLOW if suspicious > 2 else Fore.GREEN
+    
     print("\n▼ VirusTotal results ▼\n")
     table.field_names = ["Field", "Result"]
-    table.add_row(["Total malicious", Fore.GREEN + malicious + Style.RESET_ALL])
-    table.add_row(["Total suspicious", Fore.GREEN + suspicious + Style.RESET_ALL])
+    table.align["Field"] = "l"
+    table.add_row(["Total malicious", malicious_color + str(malicious) + Style.RESET_ALL])
+    table.add_row(["Total suspicious", suspicious_color + str(suspicious) + Style.RESET_ALL])
     table.add_row(["Total harmless", Fore.GREEN + harmless + Style.RESET_ALL])
     table.add_row(["Total undetected", Fore.GREEN + undetected + Style.RESET_ALL])
     table.max_width["Result"] = 80 

@@ -90,7 +90,7 @@ def display_entry_details(entry):
 def entry_select(selection, history):
     running_tool = True
     while running_tool:
-        if selection == "exit":
+        if selection == "home":
             print("Returning to home page..")
             time.sleep(2)
             os.system('cls')
@@ -149,7 +149,7 @@ def main():
     history = display_history()
     if history:  # Proceed only if history is not empty
         try:
-            selection = input("\nEnter a number to view the associated results or type 'exit' to return to the home page: ")
+            selection = input("\nEnter a number to view the associated results or type 'home' to return to the home page: ")
             entry_select(selection, history)
         except ValueError:
             print("Invalid input. Please enter a number.")

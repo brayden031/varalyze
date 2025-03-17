@@ -78,7 +78,7 @@ def main():
                             invalid_exit = False
                             running_tool = False
                             os.system('cls')
-                            mac_tool.MAC_tools()
+                            mac_tool.mac_tools()
                         elif exit_tool == "home":
                             invalid_exit = False
                             running_tool = False

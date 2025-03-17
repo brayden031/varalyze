@@ -15,8 +15,8 @@ def ip_tools():
 ║                                                                            ║ 
 ╠════════════════════════════════════════════════════════════════════════════╣
 ║                                                                            ║
-║           Welcome to the ip address tools. These tools will retrieve       ║
-║            a vast amount of useful details associated with an ip...        ║
+║           Welcome to the IP address tools. These tools will retrieve       ║
+║            a vast amount of useful details associated with an IP...        ║
 ║                                                                            ║
 ╠════════════════════════════════════════════════════════════════════════════╣
 ║                                                                            ║                                

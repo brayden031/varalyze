@@ -49,7 +49,6 @@ def multi_ip():
                     user_comment = input("Enter comment: ")  
                     if len(user_comment) > 50:
                         user_comment = user_comment[:30] 
-                
                 for choice in user_selections:
                     try:
                         # Get the tool/module corresponding to the user's choice
@@ -103,7 +102,7 @@ def multi_url():
                     user_comment = input("Enter comment: ")
                     if len(user_comment) > 50:
                         user_comment = user_comment[:30]
-  
+                print("\nBeginning multi-tool execution please wait...\n")
                 for choice in user_selections:
                     try:
                         # Get the tool/module corresponding to the user's choice

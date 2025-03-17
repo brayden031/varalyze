@@ -23,6 +23,9 @@ def file_creation(investigation_path):
         if not filename.endswith(".txt"):
             filename += ".txt"
         report_path = os.path.join(investigation_path, filename)
+        if os.path.exists(report_path):
+            print(f"A file named '{filename}' already exists. Please choose a different filename.")
+            continue
         try:
             # Varalyze file template
             with open(report_path, "w") as file:
