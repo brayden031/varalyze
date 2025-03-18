@@ -69,13 +69,24 @@ def file_results(response_json, file_path):
     harmless = str(stats.get('harmless', 0))
     undetected = str(stats.get('undetected', 0))
     
+    malicious_color = Fore.RED if malicious > 5 else Fore.GREEN
+    suspicious_color = Fore.YELLOW if suspicious > 2 else Fore.GREEN
+    
+    attributes = response_json['data']['attributes']
+    analysis_timestamp = attributes.get('date')
+    if analysis_timestamp:
+        analysis_date = datetime.fromtimestamp(analysis_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        analysis_date = "N/A"
+    
     print("\n▼ VirusTotal results ▼\n ")
     table.field_names = ["Field", "Result"]
     table.align["Field"] = "l"
-    table.add_row(["Total malicious", Fore.GREEN + malicious + Style.RESET_ALL])
-    table.add_row(["Total suspicious", Fore.GREEN + suspicious + Style.RESET_ALL])
+    table.add_row(["Total malicious", malicious_color + str(malicious) + Style.RESET_ALL])
+    table.add_row(["Total suspicious", suspicious_color + str(suspicious) + Style.RESET_ALL])
     table.add_row(["Total harmless", Fore.GREEN + harmless + Style.RESET_ALL])
     table.add_row(["Total undetected", Fore.GREEN + undetected + Style.RESET_ALL])
+    table.add_row(["Analysis Date", Fore.GREEN + analysis_date + Style.RESET_ALL])
     table.max_width["Result"] = 80
     print(table)
     table.clear_rows()
@@ -85,7 +96,8 @@ def file_results(response_json, file_path):
     "Total malicious": malicious,
     "Total suspicious": suspicious,
     "Total harmless": harmless,
-    "Total undetected": undetected
+    "Total undetected": undetected,
+    "Analysis Date": analysis_date
     }
      
     if case_workflow_tool.session_active:  

@@ -3,6 +3,7 @@ from shared_imports import *
 from tool_options import domain_tool
 from features import history_cli_tool
 from features import case_workflow_tool
+from datetime import datetime
 import varalyze_cli
 
 
@@ -73,6 +74,13 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     malicious_color = Fore.RED if malicious > 5 else Fore.GREEN
     suspicious_color = Fore.YELLOW if suspicious > 2 else Fore.GREEN
     
+    attributes = response_json['data']['attributes']
+    analysis_timestamp = attributes.get('date')
+    if analysis_timestamp:
+        analysis_date = datetime.fromtimestamp(analysis_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        analysis_date = "N/A"
+    
     print("\n▼ VirusTotal results ▼\n")
     table.field_names = ["Field", "Result"]
     table.align["Field"] = "l"
@@ -80,6 +88,7 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
     table.add_row(["Total suspicious", suspicious_color + str(suspicious) + Style.RESET_ALL])
     table.add_row(["Total harmless", Fore.GREEN + harmless + Style.RESET_ALL])
     table.add_row(["Total undetected", Fore.GREEN + undetected + Style.RESET_ALL])
+    table.add_row(["Analysis Date", Fore.GREEN + analysis_date + Style.RESET_ALL])
     table.max_width["Result"] = 80 
     print(table)
     table.clear_rows()
@@ -89,7 +98,8 @@ def url_results(response_json, url, prompt_for_comment=True, user_comment=""):
         "Total malicious": malicious,
         "Total suspicious": suspicious,
         "Total harmless": harmless,
-        "Total undetected": undetected
+        "Total undetected": undetected,
+        "Analysis Date": analysis_date
     }
 
     if case_workflow_tool.session_active:  

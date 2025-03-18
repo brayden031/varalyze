@@ -91,8 +91,9 @@ def main():
 ║                                                                            ║
 ║                    TOOLS                          OTHER                    ║
 ║                                                                            ║
-║                    1. Initiate session            3. Home page             ║    
-║                    2. End session                 4. Exit                  ║               
+║                    1. Initiate session            4. Home page             ║    
+║                    2. End session                 5. Exit                  ║
+║                    3. Restore session                                      ║
 ║                                                                            ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 """)
@@ -111,10 +112,24 @@ def main():
         elif user_option == '2':
             session_end()
         elif user_option == '3':
+            if session_active:
+                print("\nWarning: A session is already active please end it before re-initiating.\n")
+            else:
+                investigation_path = folder_creation()
+                filename = input("\nEnter the filename to re-initiate session: ").strip()
+                if not filename.endswith(".txt"):
+                    filename += ".txt"
+                report_path = os.path.join(investigation_path, filename)
+                if os.path.exists(report_path):
+                    session_start()
+                    session_file = report_path
+                else:
+                    print(f"No file found with name '{filename}'. Please check the filename and try again.")   
+        elif user_option == '4':
             os.system('cls')
             varalyze_cli.main()
             break
-        elif user_option == '4':
+        elif user_option == '5':
             varalyze_cli.exit_program()
         else:
             print("\nError: Invalid choice. Please select from 1-4...\n")
