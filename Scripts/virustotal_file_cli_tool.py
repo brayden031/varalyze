@@ -63,9 +63,8 @@ def result_complete(vt_analysis_id, VIRUSTOTAL_API_KEY):
 def file_results(response_json, file_path):
     
     stats = response_json['data']['attributes']['stats']
-    
-    malicious = str(stats.get('malicious', 0))
-    suspicious = str(stats.get('suspicious', 0))
+    malicious = stats.get('malicious', 0)
+    suspicious = stats.get('suspicious', 0)
     harmless = str(stats.get('harmless', 0))
     undetected = str(stats.get('undetected', 0))
     
