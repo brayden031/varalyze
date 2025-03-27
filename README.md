@@ -69,3 +69,6 @@ python varalyze_cli.py
 
 </div>
 <br>
+
+### Contributions
+Please note at this current time I cannot accept contributions. This project was built for my dissertation which is currently still under assessment. However, once this is complete I am more than happy to open the project up to contributions and already have lots of ideas lined up so feel free to reach out if interested in future developments.
